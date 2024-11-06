@@ -4,13 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
-    <title>Team 2 Project Demo</title>
+    <title>Eco-Adventure: A Mission to Save the Planet</title>
 
     <!-- <script src="https://cdn.jsdelivr.net/npm/phaser@3.86.0/dist/phaser-arcade-physics.min.js"></script> --> <!-- One way to load phaser's content -->
     <script src="lib/phaser.js"></script> <!-- another way to load phaser's content -->
-    <script src="scripts/Preloader.js" defer></script>
-    <script src="scripts/Scenes/GameLevel.js" defer></script>
+    <script src="scripts/Scenes/LoadingScreen.js" defer></script>
+    <script src="scripts/Scenes/IntroScene.js" defer></script>
+    <script src="scripts/Scenes/MainMenu.js" defer></script>
     <script src="scripts/main.js" defer></script>
+    <link rel="stylesheet" href="styles/style.css">
     
     <style>
 		body {
@@ -20,11 +22,11 @@
         }
 
         #game-container {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
+            width: 100%;
+            height: 100%;
+            /* display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; */
         }
 	</style>
 </head>

@@ -1,7 +1,13 @@
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 720,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: window.innerWidth,
+        height: window.innerHeight,
+    },
     physics: {
         default: 'arcade',
         arcade: {
@@ -9,7 +15,7 @@ const config = {
             debug: false
         }
     },
-    scene: [Preloader, GameLevel],
+    scene: [LoadingScreen, IntroScene, MainMenu],
     parent: 'game-container',
 };
 
