@@ -15,7 +15,7 @@ const config = {
             debug: false
         }
     },
-    scene: [LoadingScreen, IntroScene, MainMenu],
+    scene: [LoadingScreen, CrashScene, IntroScene, MainMenu],
     parent: 'game-container',
 };
 

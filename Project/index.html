@@ -8,11 +8,6 @@
 
     <!-- <script src="https://cdn.jsdelivr.net/npm/phaser@3.86.0/dist/phaser-arcade-physics.min.js"></script> --> <!-- One way to load phaser's content -->
     <script src="lib/phaser.js"></script> <!-- another way to load phaser's content -->
-    <script src="scripts/Scenes/LoadingScreen.js" defer></script>
-    <script src="scripts/Scenes/IntroScene.js" defer></script>
-    <script src="scripts/Scenes/MainMenu.js" defer></script>
-    <script src="scripts/main.js" defer></script>
-    <script src="scripts/index-content.js"></script>
     <link rel="stylesheet" href="styles/style.css">
     
     <style>
@@ -59,8 +54,8 @@
         </aside>
 
         <main class="main-content">
+            <button type="submit" id="launch-game-button" onclick="window.location.href='game.html'">Launch the Game!</button>
             <canvas id="gameCanvas">
-                <div id="game-container"></div>
             </canvas>
             <div class="how-to-play">
                 <h3>How to Play</h3>

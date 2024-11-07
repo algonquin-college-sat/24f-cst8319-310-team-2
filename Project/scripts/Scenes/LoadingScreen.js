@@ -28,7 +28,7 @@ class LoadingScreen extends Phaser.Scene {
             outerSound.play();
             this.time.delayedCall(2000, () => {
                 outerSound.stop();
-                this.scene.start('IntroScene');
+                this.scene.start('CrashScene'); //IntroScene
             });
         });
     }
