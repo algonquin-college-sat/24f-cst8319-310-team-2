@@ -1,57 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser-arcade-physics.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>Eco-Adventures: A Mission to Save the Planets</title>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/phaser@3.86.0/dist/phaser-arcade-physics.min.js"></script> --> <!-- One way to load phaser's content -->
+    <script src="lib/phaser.js"></script> <!-- another way to load phaser's content -->
+    <link rel="stylesheet" href="styles/style.css">
+    
+    <style>
+		body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #2f2f2f;
+        }
+
+        #game-container {
+            width: 100%;
+            height: 100%;
+            /* display: flex;
+            justify-content: center;
+            align-items: center; */
+        }
+	</style>
 </head>
 <body>
+    <div class="background" style="background-image: url('assets/background.jpg');"></div>
 
-    <script>
-    class Example extends Phaser.Scene
-    {
-        preload ()
-        {
-            this.load.setBaseURL('https://labs.phaser.io');
+    <header>
+        <div class="logo">
+            <img src="assets/Logo.png" alt="Webyte Logo">
+        </div>
+        <nav class="top-nav">
+            <a href="#">Topic 1</a>
+            <a href="#">Topic 2</a>
+            <a href="#">Topic 3</a>
+            <a href="#">Topic 4</a>
+        </nav>
+    </header>
 
-            this.load.image('sky', 'assets/skies/space3.png');
-            this.load.image('logo', 'assets/sprites/phaser3-logo.png');
-            this.load.image('red', 'assets/particles/red.png');
-        }
+    <div class="container">
+        <aside class="left-sidebar">
+            <h3>Levels</h3>
+            <ul>
+                <li class="level-box">Level 1</li>
+                <li class="level-box">Level 2</li>
+                <li class="level-box">Level 3</li>
+                <li class="level-box">Level 4</li>
+                <li class="level-box">Level 5</li>
+            </ul>
+        </aside>
 
-        create ()
-        {
-            this.add.image(400, 300, 'sky');
+        <main class="main-content">
+            <button type="submit" id="launch-game-button" onclick="window.location.href='game.html'">Launch the Game!</button>
+            <canvas id="gameCanvas">
+            </canvas>
+            <div class="how-to-play">
+                <h3>How to Play</h3>
+                <p id="instructions">Instructions go here.</p>
+            </div>
+        </main>
 
-            const particles = this.add.particles(0, 0, 'red', {
-                speed: 100,
-                scale: { start: 1, end: 0 },
-                blendMode: 'ADD'
-            });
+        <aside class="right-sidebar">
+            <h3>Features</h3>
+            <ul>
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+                <li>Feature 4</li>
+            </ul>
+            <div class="no-internet">
+                <p>No internet? Download here: <a href="#">Link to game as electron app</a></p>
+            </div>
+        </aside>
+    </div>
 
-            const logo = this.physics.add.image(400, 100, 'logo');
-
-            logo.setVelocity(100, 200);
-            logo.setBounce(1, 1);
-            logo.setCollideWorldBounds(true);
-
-            particles.startFollow(logo);
-        }
-    }
-
-    const config = {
-        type: Phaser.AUTO,
-        width: 800,
-        height: 600,
-        scene: Example,
-        physics: {
-            default: 'arcade',
-            arcade: {
-                gravity: { y: 200 }
-            }
-        }
-    };
-
-    const game = new Phaser.Game(config);
-    </script>
-
+    <footer>
+        <p>  &copy; 2024 Webyte </p>
+    </footer>
+    
 </body>
 </html>
