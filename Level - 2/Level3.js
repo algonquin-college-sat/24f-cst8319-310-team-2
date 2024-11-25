@@ -11,7 +11,7 @@ export default class Level3 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('level-bg', 'images/Level3.jpg');
+        this.load.image('lvlbg', 'images/Level3.jpg');
         this.load.audio('click', 'music/click.wav');
         this.load.image('player', 'images/player.webp');
         this.load.image('public', 'images/level3/public.jpg');
@@ -24,11 +24,11 @@ export default class Level3 extends Phaser.Scene {
         this.load.audio('pedalExplanation', 'music/level3/pedal.mp3');
         this.load.audio('car2Explanation', 'music/level3/car.mp3');
         this.load.audio('publicExplanation', 'music/level3/public.mp3');
-        this.load.audio('start1', 'music/level3/intro.mp3');
+        this.load.audio('strt1', 'music/level3/intro.mp3');
         this.load.audio('smokingExplanation', 'music/level3/smoke.mp3');
         this.load.audio('plantExplanation', 'music/level3/tree.mp3');
-        this.load.audio('finish', 'music/level3/congrats.mp3');
-        this.load.audio('restart', 'music/level3/restart.mp3');
+        this.load.audio('fnsh1', 'music/level3/congrats.mp3');
+        this.load.audio('rst', 'music/level3/restart.mp3');
 
         this.load.on('loaderror', (file) => {
             console.error('Error loading asset:', file.key);
@@ -36,7 +36,7 @@ export default class Level3 extends Phaser.Scene {
     }
 
     create() {
-        this.background = this.add.image(window.innerWidth / 2, window.innerHeight / 2, 'level-bg')
+        this.background = this.add.image(window.innerWidth / 2, window.innerHeight / 2, 'lvlbg')
             .setDisplaySize(window.innerWidth, window.innerHeight);
         this.setupPollutedAir();
         this.setupGameElements();
@@ -373,8 +373,8 @@ formatTime(seconds) {
       duration: 500
     });
   
-    this.start1 = this.sound.add('start1');
-    this.start1.play();
+    this.strt1 = this.sound.add('strt1');
+    this.strt1.play();
   
     this.input.on('pointerdown', this.handleIntroClick.bind(this));
   }
@@ -390,7 +390,7 @@ formatTime(seconds) {
       if (this.isIntroComplete) return;
       
       this.isIntroComplete = true;
-      if (this.start1) this.start1.stop();
+      if (this.strt1) this.strt1.stop();
     
       this.tweens.add({
         targets: [this.dialogueBubble1, this.guide],
@@ -532,7 +532,7 @@ formatTime(seconds) {
       this.pollutedAir.stop();
       
       // Play completion sound
-      const finishSound = this.sound.add('finish');
+      const finishSound = this.sound.add('fnsh1');
       finishSound.play();
       
       // Create guide character for final message
@@ -595,7 +595,7 @@ formatTime(seconds) {
       this.dismissExplanation();
       
       // Play timeout audio
-      const restartSound = this.sound.add('restart');
+      const restartSound = this.sound.add('rst');
       restartSound.play({ volume: 0.6 });
       
       const guide = this.add.sprite(-100, window.innerHeight - 50, 'player')
