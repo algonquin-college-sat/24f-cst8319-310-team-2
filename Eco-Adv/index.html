@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Adventure</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <!-- Start Screen -->
+        <div id="startScreen">
+            <h1>Welcome to Eco Adventure</h1>
+            <button id="startButton">Start Game</button>
+        </div>
+
+        <!-- Game Area -->
+        <div class="hover-area">
+            <div class="moving-object"></div>
+            <canvas id="gameCanvas" width="1920" height="1080"></canvas>
+            <div id="blackOverlay"></div>
+            <img id="stone" draggable="false" src="public/assets/stone2.png" alt="Stone Image">
+            <img id="smoke2" draggable="false" class="smoke" src="public/assets/smoke.png" alt="Smoke Image">
+            <img id="board" draggable="false" class="board" src="public/assets/Board.png" alt="Board">
+
+            <!-- Modal -->
+            <div id="modal" class="modal">
+            <div class="modal-content">
+            <img id="modalImage" src="public/assets/info.jpg" alt="Info Image">
+            <div class="modal-buttons">
+            <button id="prevImage" class="modal-button">Previous</button>
+            <button id="nextImage" class="modal-button">Next</button>
+            <button id="closeModal" class="modal-button">Close</button>
+            </div>
+            </div>
+            </div>
+
+            <div class="bins" draggable="false" id="3bins" style="background-image: url('public/assets/3bins.png');"></div>
+
+            <div id="rover" style="background-image: url('public/assets/rover.png');"></div>
+
+            <!-- Trash Items -->
+            <div class="trash-item" draggable="true" id="brokenCan" style="background-image: url('public/assets/BrokenCanes.png');"></div>
+            <div class="trash-item" draggable="true" id="cardboardBox" style="background-image: url('public/assets/CardboardBoxes.png');"></div>
+            <div class="trash-item" draggable="true" id="plasticBottle" style="background-image: url('public/assets/PlasticBottles.png');"></div>
+            <div class="trash-item" draggable="true" id="glassBottle" style="background-image: url('public/assets/GlassBottles.png');"></div>
+            <div class="trash-item" draggable="true" id="foodWrapper" style="background-image: url('public/assets/FoodWrappers.png');"></div>
+            <div class="trash-item" draggable="true" id="plasticBag" style="background-image: url('public/assets/PlasticBags.png');"></div>
+            <div class="trash-item" draggable="true" id="oldShoe" style="background-image: url('public/assets/OldShoes.png');"></div>
+            <div class="trash-item" draggable="true" id="crumpledPaper" style="background-image: url('public/assets/CrambledPaper.png');"></div>
+            <div class="trash-item" draggable="true" id="rustyCan" style="background-image: url('public/assets/RustyCans.png');"></div>
+
+            <!-- Trash Items 2 -->
+            <div class="trash-item-2" draggable="true" id="bananaPeel" style="background-image: url('public/assets/banana.png');"></div>
+            <div class="trash-item-2" draggable="true" id="brokenEgg" style="background-image: url('public/assets/brokenegg.png');"></div>
+            <div class="trash-item-2" draggable="true" id="organicWaste" style="background-image: url('public/assets/organicwaste.png');"></div>
+            <div class="trash-item-2" draggable="true" id="oldCup" style="background-image: url('public/assets/OldCups.png');"></div>
+            <div class="trash-item-2" draggable="true" id="milkCarton" style="background-image: url('public/assets/milkcarton.png');"></div>
+            <div class="trash-item-2" draggable="true" id="pizzaBox" style="background-image: url('public/assets/pizza.png');"></div>
+
+            <!-- Game Window -->
+        <div id="gameWindow" class="game-window" style="display: none;">
+            <h2>Sort Your Trash!</h2>
+
+            <!-- Trash Items to Sort -->
+            <div class="collected-items">
+                <div id="brokenCan1" class="trash-item3" draggable="true" style="background-image: url('public/assets/BrokenCanes.png');"></div>
+                <div id="cardboardBox1" class="trash-item3" draggable="true" style="background-image: url('public/assets/CardboardBoxes.png');"></div>
+                <div id="plasticBottle1" class="trash-item3" draggable="true" style="background-image: url('public/assets/PlasticBottles.png');"></div>
+                <div id="glassBottle1" class="trash-item3" draggable="true" style="background-image: url('public/assets/GlassBottles.png');"></div>
+                <div id="foodWrapper1" class="trash-item3" draggable="true" style="background-image: url('public/assets/FoodWrappers.png');"></div>
+                <div id="plasticBag1" class="trash-item3" draggable="true" style="background-image: url('public/assets/PlasticBags.png');"></div>
+                <div id="oldShoe1" class="trash-item3" draggable="true" style="background-image: url('public/assets/OldShoes.png');"></div>
+                <div id="crumpledPaper1" class="trash-item3" draggable="true" style="background-image: url('public/assets/CrambledPaper.png');"></div>
+                <div id="rustyCan1" class="trash-item3" draggable="true" style="background-image: url('public/assets/RustyCans.png');"></div>
+                <div id="bananaPeel1" class="trash-item3" draggable="true" style="background-image: url('public/assets/banana.png');"></div>
+                <div id="brokenEgg1" class="trash-item3" draggable="true" style="background-image: url('public/assets/brokenegg.png');"></div>
+                <div id="organicWaste1" class="trash-item3" draggable="true" style="background-image: url('public/assets/organicwaste.png');"></div>
+                <div id="oldCup1" class="trash-item3" draggable="true" style="background-image: url('public/assets/OldCups.png');"></div>
+                <div id="milkCarton1" class="trash-item3" draggable="true" style="background-image: url('public/assets/milkcarton.png');"></div>
+                <div id="pizzaBox1" class="trash-item3" draggable="true" style="background-image: url('public/assets/pizza.png');"></div>
+            </div>
+
+            <!-- Bins for Sorting -->
+            <div class="bins-container">
+                <div id="greenBin" class="bin" ondrop="drop(event)" ondragover="allowDrop(event)" style="background-image: url('public/assets/GreenBin.png');"></div>
+                <div id="blueBin" class="bin" ondrop="drop(event)" ondragover="allowDrop(event)" style="background-image: url('public/assets/BlueBin.png');"></div>
+                <div id="blackBin" class="bin" ondrop="drop(event)" ondragover="allowDrop(event)" style="background-image: url('public/assets/BlackBin.png');"></div>
+            </div>
+
+            <!-- Close Game Button -->
+            <button id="closeGame">Close Game</button>
+        </div>
+
+            <div id="astronaut" style="background-image: url('public/assets/astronaut.png');"></div>
+            <div id="dialogueBox"></div>
+            <div id="score">Score: 0</div>
+            <button id="Next">Next</button>
+            <button id="Next2">Next</button>
+            <button id="Prev">Prev</button>
+            <button id="Prev2">Prev</button>
+            <!-- Congratulation Message -->
+            <div id="congratsMessage" class="congrats-container" style="display: none;">
+            <div class="blur-background"></div>
+            <div class="congrats-content">
+            <h2>Congratulations! You finished Level 1!</h2>
+            </div>
+            </div>
+
+        </div>
+    </main>
+    <script src="main.js"></script>
+</body>
+</html>
