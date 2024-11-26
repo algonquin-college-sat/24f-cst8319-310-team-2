@@ -197,9 +197,6 @@ export default class QuizScene extends Phaser.Scene {
       }).setOrigin(0.5);
   
       const explanations = [
-        "Identifying polluters raises awareness about environmental issues and helps target efforts to reduce pollution.",
-        "Planting trees is crucial for providing fresh air, as trees absorb carbon dioxide and release oxygen through photosynthesis.",
-        "Green barriers, such as rows of trees or shrubs, can effectively reduce noise pollution by absorbing and deflecting sound waves.",
         "Factory pollution can lead to serious health issues and environmental degradation, making control measures essential.",
         "Trees act as natural air purifiers, absorbing pollutants and releasing clean oxygen, improving overall air quality.",
         "Electric cars and public transport significantly reduce emissions compared to traditional vehicles, helping combat air pollution.",
