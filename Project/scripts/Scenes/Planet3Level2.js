@@ -45,7 +45,7 @@ class Planet3Level2 extends Phaser.Scene {
             fill: '#ffffff'
         });
 
-        this.boat = this.physics.add.sprite(400, this.scale.height - 100, 'boat').setScale(0.1);
+        this.boat = this.physics.add.sprite(400, this.scale.height - 100, 'boat').setScale(0.15);
         this.boat.setCollideWorldBounds(true);
 
         // Trash generation

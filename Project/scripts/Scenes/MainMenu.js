@@ -23,7 +23,7 @@ class MainMenu extends Phaser.Scene {
         });
 
         // Level 2 Button
-        let level2Button = this.add.text(this.scale.width / 2, this.scale.height * 0.6, 'Planet 3: Level 2', {
+        let level2Button = this.add.text(this.scale.width / 2, this.scale.height * 0.5, 'Planet 3: Level 2', {
             fontSize: '32px',
             fill: '#ffffff',
             backgroundColor: '#555'
@@ -31,6 +31,17 @@ class MainMenu extends Phaser.Scene {
 
         level2Button.on('pointerdown', () => {
             this.scene.start('Planet3Level2');
+        });
+
+        // Level 3 Button
+        let level3Button = this.add.text(this.scale.width / 2, this.scale.height * 0.6, 'Planet 3: Level 3', {
+            fontSize: '32px',
+            fill: '#ffffff',
+            backgroundColor: '#777'
+        }).setOrigin(0.5).setInteractive();
+
+        level3Button.on('pointerdown', () => {
+            this.scene.start('Planet3Level3');
         });
     }
 
