@@ -15,7 +15,7 @@ const config = {
             debug: false
         }
     },
-    scene: [LoadingScreen, CrashScene, IntroScene, MainMenu],
+    scene: [LoadingScreen, CrashScene, IntroScene, MainMenu, Planet3Level1, Planet3Level2],
     parent: 'game-container',
 };
 

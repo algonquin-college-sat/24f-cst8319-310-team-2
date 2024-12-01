@@ -4,15 +4,30 @@ class MainMenu extends Phaser.Scene {
     }
 
     create() {
-        this.add.text(400, 300, 'Main Menu!', {
-            fontSize: '40px',
-            fill: '#fff'
+        this.add.text(this.scale.width / 2, this.scale.height * 0.2, 'Main Menu', {
+            fontSize: '48px',
+            fill: '#ffffff',
+            fontStyle: 'bold'
         }).setOrigin(0.5);
-        
-        // More game elements go here
+
+        this.add.text(this.scale.width / 2, this.scale.height * 0.4, 'Planet 3: Level 1', {
+            fontSize: '32px',
+            fill: '#ffffff',
+            fontStyle: 'italic'
+        }).setOrigin(0.5);
+
+        let startLevel3Button = this.add.text(this.scale.width / 2, this.scale.height * 0.6, 'Start Level 1', {
+            fontSize: '28px',
+            fill: '#ffffff',
+            backgroundColor: '#333'
+        }).setOrigin(0.5).setInteractive();
+
+        startLevel3Button.on('pointerdown', () => {
+            this.scene.start('Planet3Level1');
+        });
     }
 
     update() {
-        // More game element logics go here
+        // Add any logic if needed
     }
 }
