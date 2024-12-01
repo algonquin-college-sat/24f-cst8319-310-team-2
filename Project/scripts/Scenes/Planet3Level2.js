@@ -3,17 +3,18 @@ class Planet3Level2 extends Phaser.Scene {
         super({ key: 'Planet3Level2' });
         this.boat = null;
         this.trash = [];
-        this.bins = [];
+        this.visibleTrash = [];
+        this.bin = null;
         this.score = 0;
         this.trashCollected = 0;
-        this.inventory = []; // Store collected trash here
+        this.inventory = null;
     }
 
     preload() {
-        this.load.image('background', 'assets/river-background.png');
+        this.load.image('river-background', 'assets/river-background.jpg');
         this.load.image('boat', 'assets/boat.png');
-        this.load.image('bin', 'assets/bin.png');
-        this.load.image('rock', 'assets/rock.png');
+        this.load.image('3bins', 'assets/3bins.png');
+        // this.load.image('rock', 'assets/rock.png');
 
         // Load trash images dynamically
         for (let i = 1; i <= 8; i++) {
@@ -22,47 +23,51 @@ class Planet3Level2 extends Phaser.Scene {
     }
 
     create() {
-        // Background
-        this.add.image(this.scale.width / 2, this.scale.height / 2, 'background')
-            .setDisplaySize(this.scale.width, this.scale.height);
+        let bg = this.add.image(this.scale.width / 2, this.scale.height / 2, 'river-background');
+        bg.setScale(this.scale.width / bg.width);
+        bg.setY(this.scale.height - bg.displayHeight / 2);
 
-        // Instructions
-        this.add.text(20, 20, 'Use arrow keys to navigate the boat and collect trash!', {
-            fontSize: '24px',
+        let instructionBg = this.add.graphics();
+        instructionBg.fillStyle(0x000000, 0.7);
+        instructionBg.fillRect(10, 10, this.scale.width - 20, 50);
+
+        this.add.text(20, 20, 'Use arrow keys to navigate, collect trash, and dispose of it in the bin!', {
+            fontSize: '20px',
             fill: '#ffffff'
         });
 
-        // Boat (scaled down by 90%)
+        let inventoryBg = this.add.graphics();
+        inventoryBg.fillStyle(0x000000, 0.7);
+        inventoryBg.fillRect(10, 70, this.scale.width - 20, 30);
+
+        this.inventoryText = this.add.text(20, 75, 'Inventory: Empty', {
+            fontSize: '20px',
+            fill: '#ffffff'
+        });
+
         this.boat = this.physics.add.sprite(400, this.scale.height - 100, 'boat').setScale(0.1);
         this.boat.setCollideWorldBounds(true);
 
-        // Trash collection
-        for (let i = 0; i < 10; i++) {
-            // Randomly pick one of the trash images
+        // Trash generation
+        for (let i = 0; i < 5; i++) {
             const trashType = `trash${Phaser.Math.Between(1, 8)}`;
             let trash = this.physics.add.sprite(
-                Phaser.Math.Between(100, this.scale.width - 100),
-                Phaser.Math.Between(100, this.scale.height / 2), 
+                Phaser.Math.Between(this.scale.width / 2, this.scale.width - 100),
+                Phaser.Math.Between(this.scale.height / 2, this.scale.height - 200),
                 trashType
-            ).setScale(0.2);
+            ).setScale(0.1);
 
+            trash.setActive(false).setVisible(false);
             this.trash.push(trash);
         }
 
-        // Bins
-        this.bins = [
-            this.add.sprite(100, this.scale.height - 100, 'bin').setScale(0.5),
-            this.add.sprite(700, this.scale.height - 100, 'bin').setScale(0.5)
-        ];
+        this.spawnTrash();
 
-        // Score Display (top right)
+        this.bin = this.physics.add.staticSprite(200, this.scale.height - 100, '3bins').setScale(0.5);
+        this.bin.setSize(this.bin.displayWidth * 1.20, this.bin.displayHeight * 1.20)
+        .setOffset(this.bin.displayWidth * 0.3, this.bin.displayHeight * 0.3); // Handles collision box position
+
         this.scoreText = this.add.text(this.scale.width - 200, 20, 'Score: 0', {
-            fontSize: '24px',
-            fill: '#ffffff'
-        });
-
-        // Inventory Display (bottom left)
-        this.inventoryText = this.add.text(20, this.scale.height - 100, 'Trash Collected: 0', {
             fontSize: '24px',
             fill: '#ffffff'
         });
@@ -70,27 +75,28 @@ class Planet3Level2 extends Phaser.Scene {
         // Input for Boat Movement
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        // Collisions
         this.trash.forEach(trash => {
             this.physics.add.overlap(this.boat, trash, (boat, trash) => {
-                trash.destroy();
-                this.trashCollected++;
-                this.inventory.push(trash.texture.key);  // Add to inventory
-                this.score += 10;
-                this.updateInventory();  // Update inventory display
+                if (!this.inventory && trash.visible) {
+                    this.pickUpTrash(trash);
+                }
             });
         });
 
-        // Obstacles (Rocks)
-        for (let i = 0; i < 5; i++) {
-            let rock = this.physics.add.staticSprite(
-                Phaser.Math.Between(100, this.scale.width - 100),
-                Phaser.Math.Between(100, this.scale.height / 2), 
-                'rock'
-            ).setScale(0.3);
+        this.physics.add.overlap(this.boat, this.bin, (boat, bin) => {
+            this.disposeTrash();
+        });
 
-            this.physics.add.collider(this.boat, rock);
-        }
+        // // Obstacles (Rocks)
+        // for (let i = 0; i < 5; i++) {
+        //     let rock = this.physics.add.staticSprite(
+        //         Phaser.Math.Between(100, this.scale.width - 100),
+        //         Phaser.Math.Between(100, this.scale.height / 2),
+        //         'rock'
+        //     ).setScale(0.3);
+
+        //     this.physics.add.collider(this.boat, rock);
+        // }
     }
 
     update() {
@@ -113,43 +119,78 @@ class Planet3Level2 extends Phaser.Scene {
             this.boat.setVelocityY(0);
         }
 
-        // Update Score
         this.scoreText.setText('Score: ' + this.score);
 
-        // Check for Level Completion
-        if (this.trashCollected === this.trash.length) {
-            this.add.text(this.scale.width / 2, this.scale.height / 2, 'Level Complete!', {
+        if (this.trashCollected === 5) {
+            this.add.text(this.scale.width / 2, this.scale.height / 2 - 100, 'Level Complete!', {
                 fontSize: '48px',
                 fill: '#ffffff',
                 fontStyle: 'bold'
             }).setOrigin(0.5);
 
-            this.add.text(this.scale.width / 2, this.scale.height / 2 + 40, 
+            this.add.text(this.scale.width / 2, this.scale.height / 2 + 20,
                 'Reward: "Stabilizer" – improves spaceship performance.', {
                 fontSize: '24px',
                 fill: '#ffff00'
             }).setOrigin(0.5);
 
-            this.time.delayedCall(5000, () => {
-                this.scene.start('MainMenu'); // Return to Main Menu
+            let menuButton = this.add.text(this.scale.width / 3, this.scale.height / 2 + 50, 'Menu', {
+                fontSize: '24px',
+                fill: '#ffffff',
+                backgroundColor: '#333'
+            }).setOrigin(0.5).setInteractive();
+            menuButton.on('pointerdown', () => {
+                this.scene.start('MainMenu');
+            });
+
+            let replayButton = this.add.text(this.scale.width / 2, this.scale.height / 2 + 50, 'Replay', {
+                fontSize: '24px',
+                fill: '#ffffff',
+                backgroundColor: '#555'
+            }).setOrigin(0.5).setInteractive();
+            replayButton.on('pointerdown', () => {
+                this.scene.restart();
+            });
+
+            let nextLevelButton = this.add.text((this.scale.width / 3) * 2, this.scale.height / 2 + 50, 'Next Level', {
+                fontSize: '24px',
+                fill: '#000000',
+                backgroundColor: '#ffff00'
+            }).setOrigin(0.5).setInteractive();
+            nextLevelButton.on('pointerdown', () => {
+                this.scene.start('Planet3Level3');
             });
         }
     }
 
-    // Update inventory text
-    updateInventory() {
-        let inventoryText = 'Trash Collected: ' + this.trashCollected + '\n';
-
-        // Display collected trash types in the inventory (limited to a few)
-        let inventoryLimit = 5;
-        let displayInventory = this.inventory.slice(0, inventoryLimit).join(', ');
-
-        if (this.inventory.length > inventoryLimit) {
-            inventoryText += displayInventory + '...';
-        } else {
-            inventoryText += displayInventory;
+    spawnTrash() {
+        let count = 0;
+        for (let trash of this.trash) {
+            if (!trash.active) {
+                trash.setActive(true).setVisible(true);
+                this.visibleTrash.push(trash);
+                count++;
+            }
+            if (count >= 2) break;
         }
+    }
 
-        this.inventoryText.setText(inventoryText);
+    pickUpTrash(trash) {
+        trash.destroy();
+        this.inventory = trash.texture.key;
+        this.inventoryText.setText(`Inventory: ${this.inventory}`);
+        this.visibleTrash = this.visibleTrash.filter(t => t !== trash);
+
+        // Spawn next trash if any
+        this.spawnTrash();
+    }
+
+    disposeTrash() {
+        if (this.inventory) {
+            this.score += 10;
+            this.trashCollected++;
+            this.inventory = null;
+            this.inventoryText.setText('Inventory: Empty');
+        }
     }
 }
