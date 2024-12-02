@@ -1,0 +1,15 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "main": "phaser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Webyte",
+  "license": "",
+  "description": "",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}
