@@ -1,4 +1,4 @@
-
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +6,7 @@
     font-family: Arial, sans-serif;
 }
 
-/* General styling */
+/* Body Styling */
 body {
     display: flex;
     flex-direction: column;
@@ -14,42 +14,68 @@ body {
     color: #333;
     position: relative;
 }
-/* body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    font-family: 'Times New Roman', serif;
-} */
 
-.full-screen-gif {
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-}
-
-#start-mission-button {
-    position: absolute;
-    bottom: 5%;
-    left: 90%;
-    transform: translateX(-50%);
-    padding: 35px 60px;
-    font-size: 1.2em;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
+/* Full-Screen Elements */
+.full-screen-gif,
 .background-image {
     width: 100%;
     height: 100vh;
     object-fit: cover;
 }
 
+/* Buttons */
+#start-mission-button, 
+#launch-game-button, 
+#next-button, 
+#skip-button {
+    position: absolute;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+/* Start Mission Button */
+#start-mission-button {
+    bottom: 5%;
+    left: 90%;
+    background-color: #4CAF50;
+}
+
+#start-mission-button:hover {
+    background-color: #45a049;
+}
+
+/* Launch Game Button */
+#launch-game-button {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #3a7f40;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+#launch-game-button:hover {
+    background-color: #4caf50;
+}
+
+/* Next and Skip Buttons */
+#next-button, #skip-button {
+    bottom: 50%;
+    right: 10%;
+    background-color: rgb(0, 19, 128);
+}
+
+#skip-button {
+    bottom: 20%;
+}
+
+/* Dialogue Box */
 #dialogue-box {
     position: absolute;
     top: 0%;
@@ -58,7 +84,6 @@ body {
     width: 60%;
     max-width: 500px;
     padding: 20px;
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -72,32 +97,7 @@ body {
     padding-top: 20px;
 }
 
-#next-button {
-    position: absolute;
-    bottom: 50%;
-    right: 10%;
-    padding: 30px 40px;
-    font-size: 1em;
-    background-color: rgb(0, 19, 128);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#skip-button {
-    position: absolute;
-    bottom: 20%;
-    right: 10%;
-    padding: 30px 40px;
-    font-size: 1em;
-    background-color: rgb(0, 19, 128);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
+/* Background Overlay */
 .background {
     position: fixed;
     top: 0;
@@ -111,6 +111,7 @@ body {
     opacity: 0.8;
 }
 
+/* Header, Sidebars, Footer */
 header, .left-sidebar, .right-sidebar, footer {
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px) saturate(180%);
@@ -120,6 +121,7 @@ header, .left-sidebar, .right-sidebar, footer {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Main Content */
 .main-content {
     background-color: #FFFFFF;
     padding: 20px;
@@ -130,6 +132,7 @@ header, .left-sidebar, .right-sidebar, footer {
     z-index: 1;
 }
 
+/* Level Boxes */
 .level-box, .right-sidebar ul li {
     background-color: rgba(46, 139, 87, 0.7);
     color: white;
@@ -145,6 +148,7 @@ header, .left-sidebar, .right-sidebar, footer {
     background-color: rgba(60, 179, 113, 0.7);
 }
 
+/* Navigation Bar */
 .top-nav {
     display: flex;
     align-items: center;
@@ -166,6 +170,7 @@ header, .left-sidebar, .right-sidebar, footer {
     background-color: rgba(60, 179, 113, 0.7);
 }
 
+/* Layout Container */
 .container {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
@@ -174,33 +179,7 @@ header, .left-sidebar, .right-sidebar, footer {
     margin-top: 20px;
 }
 
-#launch-game-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 15px 30px;
-    font-size: 1.2em;
-    background-color: #3a7f40;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s;
-    z-index: 2;
-}
-
-#launch-game-button:hover {
-    background-color: #4caf50;
-}
-
-.loading-image {
-    display: block;
-    margin: 20px auto;
-}
-
+/* Footer */
 footer {
     background: none;
     color: rgb(17, 75, 0);
@@ -212,6 +191,7 @@ footer {
     box-shadow: none;
 }
 
+/* Lists */
 .left-sidebar ul, .right-sidebar ul {
     list-style-type: none;
     padding-left: 0;

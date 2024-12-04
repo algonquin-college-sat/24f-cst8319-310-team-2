@@ -4,44 +4,47 @@ class MainMenu extends Phaser.Scene {
     }
 
     create() {
-        // Main Menu Title
-        this.add.text(this.scale.width / 2, this.scale.height * 0.2, 'Main Menu', {
-            fontSize: '48px',
-            fill: '#ffffff',
-            fontStyle: 'bold'
+        // Title Text
+        this.add.text(400, 100, 'Main Menu!', {
+            fontSize: '40px',
+            fill: '#fff'
         }).setOrigin(0.5);
 
-        // Level 1 Button
-        let level1Button = this.add.text(this.scale.width / 2, this.scale.height * 0.4, 'Planet 3: Level 1', {
-            fontSize: '32px',
-            fill: '#ffffff',
-            backgroundColor: '#333'
-        }).setOrigin(0.5).setInteractive();
+        // Level Selection Buttons
+        const levels = [
+            { text: 'Level 1: Planting Grass and Flowers', scene: 'Level1Scene' },
+            { text: 'Level 2: Building Animal Shelters', scene: 'Level2Scene' },
+            { text: 'Level 3: Planting Trees and Shrubs', scene: 'Level3Scene' },
+            { text: 'Level 4: Cleaning Water Sources', scene: 'Level4Scene' },
+        ];
 
-        level1Button.on('pointerdown', () => {
-            this.scene.start('Planet3Level1');
+        levels.forEach((level, index) => {
+            this.add.text(400, 200 + index * 50, level.text, {
+                fontSize: '24px',
+                fill: '#0f0'
+            })
+            .setOrigin(0.5)
+            .setInteractive()
+            .on('pointerdown', () => {
+                this.scene.start(level.scene);
+            })
+            .on('pointerover', function () {
+                this.setStyle({ fill: '#ff0' });
+            })
+            .on('pointerout', function () {
+                this.setStyle({ fill: '#0f0' });
+            });
         });
 
-        // Level 2 Button
-        let level2Button = this.add.text(this.scale.width / 2, this.scale.height * 0.5, 'Planet 3: Level 2', {
-            fontSize: '32px',
-            fill: '#ffffff',
-            backgroundColor: '#555'
-        }).setOrigin(0.5).setInteractive();
-
-        level2Button.on('pointerdown', () => {
-            this.scene.start('Planet3Level2');
-        });
-
-        // Level 3 Button
-        let level3Button = this.add.text(this.scale.width / 2, this.scale.height * 0.6, 'Planet 3: Level 3', {
-            fontSize: '32px',
-            fill: '#ffffff',
-            backgroundColor: '#777'
-        }).setOrigin(0.5).setInteractive();
-
-        level3Button.on('pointerdown', () => {
-            this.scene.start('Planet3Level3');
+        // Exit or Instructions Button (Optional)
+        this.add.text(400, 500, 'Credits / Instructions', {
+            fontSize: '20px',
+            fill: '#fff'
+        })
+        .setOrigin(0.5)
+        .setInteractive()
+        .on('pointerdown', () => {
+            console.log("Show Credits or Instructions");
         });
     }
 
