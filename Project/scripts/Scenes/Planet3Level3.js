@@ -78,13 +78,13 @@ class Planet3Level3 extends Phaser.Scene {
         if (this.answerButtons) {
             this.answerButtons.forEach(button => button.destroy());
         }
-
+    
         // Check if there are no more questions
         if (this.registry.get('currentQuestionIndex') >= this.questions.length) {
             this.showCompletion();
             return;
         }
-
+    
         // Display the next question
         let question = this.questions[this.registry.get('currentQuestionIndex')];
         this.questionText = this.add.text(
@@ -98,10 +98,10 @@ class Planet3Level3 extends Phaser.Scene {
                 wordWrap: { width: this.scale.width - 100 }
             }
         ).setOrigin(0.5);
-
+    
         // Randomize the order of the answers
         this.shuffleArray(question.answers);
-
+    
         // Display answer options
         this.answerButtons = [];
         question.answers.forEach((answer, index) => {
@@ -111,17 +111,30 @@ class Planet3Level3 extends Phaser.Scene {
                 'button'
             ).setInteractive();
             button.setScale(1, 0.6);
-
+    
             let buttonText = this.add.text(button.x, button.y, answer.text, {
                 fontSize: '20px',
                 fill: '#000'
             }).setOrigin(0.5);
-
+    
             button.correct = answer.correct;
+    
+            // Add hover effects for style and font size
+            button.on('pointerover', () => {
+                buttonText.setStyle({ fontStyle: 'bold', fill: '#C6981F', fontSize: '24px' });
+                button.setScale(1.2, 0.8);
+            });
+    
+            button.on('pointerout', () => {
+                buttonText.setStyle({ fontStyle: 'normal', fill: '#000', fontSize: '20px' });
+                button.setScale(1, 0.6);
+            });
+    
+            // Add button and text to the answerButtons array for cleanup later
             this.answerButtons.push(button, buttonText);
         });
     }
-
+    
     showCompletion() {
         // Hide question and answers before showing completion screen
         if (this.questionText) this.questionText.destroy();

@@ -16,6 +16,9 @@ class MainMenu extends Phaser.Scene {
             { text: 'Level 2: Building Animal Shelters', scene: 'Level2Scene' },
             { text: 'Level 3: Planting Trees and Shrubs', scene: 'Level3Scene' },
             { text: 'Level 4: Cleaning Water Sources', scene: 'Level4Scene' },
+            { text: 'Planet 3, Level 1: Placing Solar Panels', scene: 'Planet3Level1' },
+            { text: 'Planet 3, Level 2: Cleaning Water Sources Continued', scene: 'Planet3Level2' },
+            { text: 'Planet 3, Level 3: Planet 3 Quiz', scene: 'Planet3Level3' },
         ];
 
         levels.forEach((level, index) => {
@@ -37,7 +40,7 @@ class MainMenu extends Phaser.Scene {
         });
 
         // Exit or Instructions Button (Optional)
-        this.add.text(400, 500, 'Credits / Instructions', {
+        this.add.text(400, 600, 'Credits / Instructions', {
             fontSize: '20px',
             fill: '#fff'
         })

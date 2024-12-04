@@ -27,18 +27,33 @@ class Planet3Level1 extends Phaser.Scene {
             fill: '#ffffff'
         });
 
-        this.add.image(this.scale.width / 2, this.scale.height / 2 + 100, 'powerGrid')
-            .setDisplaySize(this.scale.width * 0.2, this.scale.height * 0.4)
-            .setAlpha(0.8); // Semi-transparent for better visibility
+        const powerGridWidth = this.scale.width * 0.1;
+        const powerGridHeight = this.scale.height * 0.2;
+        const gridSpacing = 20;
+        const powerGridStartX = this.scale.width - 300;
+        const powerGridStartY = 200;
 
+        const gridPositions = [
+            { x: powerGridStartX, y: powerGridStartY + 240 },
+            { x: powerGridStartX + powerGridWidth + gridSpacing, y: powerGridStartY + 240 },
+            { x: powerGridStartX, y: powerGridStartY + powerGridHeight + gridSpacing + 240 },
+            { x: powerGridStartX + powerGridWidth + gridSpacing, y: powerGridStartY + powerGridHeight + gridSpacing + 240 }
+        ];
+
+        gridPositions.forEach(pos => {
+            this.add.image(pos.x, pos.y, 'powerGrid')
+                .setDisplaySize(powerGridWidth, powerGridHeight)
+                .setAlpha(0.8);
+        });
+
+        // Define buildings and drop zones. The higher the dropZoneY value is, the lower the drop zone is.
         const buildingImages = ['building1', 'building2', 'building3', 'building4', 'building5'];
-
         this.grid = [
-            { x: 200, y: 400, powered: false, image: buildingImages[0] },
-            { x: 400, y: 500, powered: false, image: buildingImages[1] },
-            { x: 700, y: 500, powered: false, image: buildingImages[2] },
-            { x: 1100, y: 500, powered: false, image: buildingImages[3] },
-            { x: 1400, y: 500, powered: false, image: buildingImages[4] }
+            { x: 200, y: 400, dropZoneY: 345, powered: false, image: buildingImages[0] },
+            { x: 400, y: 500, dropZoneY: 300, powered: false, image: buildingImages[1] },
+            { x: 700, y: 500, dropZoneY: 515, powered: false, image: buildingImages[2] },
+            { x: 1100, y: 500, dropZoneY: 355, powered: false, image: buildingImages[3] },
+            { x: 1400, y: 500, dropZoneY: 420, powered: false, image: buildingImages[4] }
         ];
 
         this.grid.forEach((spot, index) => {
@@ -48,16 +63,16 @@ class Planet3Level1 extends Phaser.Scene {
                 .setScale(scale)
                 .setAlpha(0.5);
 
-            // Add a unique "placement zone" at the bottom of each building
-            spot.dropZone = this.add.zone(spot.x, spot.y + 50, 100, 60) // Slightly larger zone size
-                .setRectangleDropZone(100, 60) // Unique size for each building
+            // Create a unique drop zone for each building
+            spot.dropZone = this.add.zone(spot.x, spot.dropZoneY, 100, 60)
+                .setRectangleDropZone(100, 60)
                 .setData('powered', false);
         });
 
-        // Solar Panels
+        // Create draggable solar panels
         for (let i = 0; i < 5; i++) {
-            let panel = this.add.image(100 + i * 120, this.scale.height - 100, 'solarPanel')
-                .setScale(0.1)
+            let panel = this.add.image(100 + i * 60, this.scale.height - 100, 'solarPanel')
+                .setScale(0.075)
                 .setInteractive({ draggable: true });
 
             this.input.setDraggable(panel);
@@ -70,20 +85,21 @@ class Planet3Level1 extends Phaser.Scene {
             panel.on('dragend', (pointer) => {
                 let placed = false;
 
+                // Check if the panel is dropped on a valid drop zone
                 this.grid.forEach((spot) => {
                     const zone = spot.dropZone;
                     const bounds = zone.getBounds();
-                    // Increase the range of solar panel placement by checking against larger bounds
-                    if (!spot.powered && Phaser.Math.Distance.Between(panel.x, panel.y, zone.x, zone.y) < 50) {
+                    if (!spot.powered && Phaser.Math.Distance.Between(panel.x, panel.y, zone.x, zone.y) < 65) {
                         panel.x = zone.x;
                         panel.y = zone.y;
                         spot.powered = true;
-                        spot.building.setAlpha(1);
+                        spot.building.setAlpha(1); // Make building appear fully powered
                         this.buildingsPowered++;
                         placed = true;
                     }
                 });
 
+                // If not placed in a valid drop zone, return to the starting position
                 if (!placed) {
                     panel.x = panel.input.dragStartX;
                     panel.y = panel.input.dragStartY;
@@ -93,7 +109,7 @@ class Planet3Level1 extends Phaser.Scene {
             this.solarPanels.push(panel);
         }
     }
-    
+
     updateCompleteMessage() {
         if (this.buildingsPowered === this.grid.length) {
             this.add.text(this.scale.width / 2, this.scale.height / 2 - 100, 'Level Complete!', {

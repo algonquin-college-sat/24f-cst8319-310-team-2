@@ -8,13 +8,24 @@ class Planet3Level2 extends Phaser.Scene {
         this.score = 0;
         this.trashCollected = 0;
         this.inventory = null;
+
+        // Mapping of trash texture keys to unique names
+        this.trashNames = {
+            trash1: 'Candy Wrappers',
+            trash2: 'Used Styrofoam Box',
+            trash3: 'Used Styrofoam Box',
+            trash4: 'Empty Plastic Bottle',
+            trash5: 'Eaten Apples',
+            trash6: 'White Plastic Bag',
+            trash7: 'Green Plastic Bag with White Container',
+            trash8: 'Used Styrofoam Boxes'
+        };
     }
 
     preload() {
         this.load.image('river-background', 'assets/river-background.jpg');
         this.load.image('boat', 'assets/boat.png');
         this.load.image('3bins', 'assets/3bins.png');
-        // this.load.image('rock', 'assets/rock.png');
 
         // Load trash images dynamically
         for (let i = 1; i <= 8; i++) {
@@ -45,7 +56,7 @@ class Planet3Level2 extends Phaser.Scene {
             fill: '#ffffff'
         });
 
-        this.boat = this.physics.add.sprite(400, this.scale.height - 100, 'boat').setScale(0.15);
+        this.boat = this.physics.add.sprite(400, this.scale.height - 100, 'boat').setScale(0.1);
         this.boat.setCollideWorldBounds(true);
 
         // Trash generation
@@ -86,17 +97,6 @@ class Planet3Level2 extends Phaser.Scene {
         this.physics.add.overlap(this.boat, this.bin, (boat, bin) => {
             this.disposeTrash();
         });
-
-        // // Obstacles (Rocks)
-        // for (let i = 0; i < 5; i++) {
-        //     let rock = this.physics.add.staticSprite(
-        //         Phaser.Math.Between(100, this.scale.width - 100),
-        //         Phaser.Math.Between(100, this.scale.height / 2),
-        //         'rock'
-        //     ).setScale(0.3);
-
-        //     this.physics.add.collider(this.boat, rock);
-        // }
     }
 
     update() {
@@ -177,7 +177,7 @@ class Planet3Level2 extends Phaser.Scene {
 
     pickUpTrash(trash) {
         trash.destroy();
-        this.inventory = trash.texture.key;
+        this.inventory = this.trashNames[trash.texture.key]; // Use the unique name
         this.inventoryText.setText(`Inventory: ${this.inventory}`);
         this.visibleTrash = this.visibleTrash.filter(t => t !== trash);
 
