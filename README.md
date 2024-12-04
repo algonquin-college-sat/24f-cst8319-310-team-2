@@ -1,105 +1,86 @@
-**Eco-Adventures: An Educational Game for Sustainability**
 
-**Overview**
+# Eco-Adventures: An Educational Game for Sustainability
+
+## Overview
 
 Eco-Adventures is a browser-based educational game built with Phaser.js. Designed to run in Visual Studio, the game engages children in learning about sustainability through interactive gameplay. Players progress through levels that cover topics such as renewable energy, waste management, air pollution, and environmental protection.
 
-**Installation Guide**
+---
 
-**Prerequisites**
+## Installation Guide
 
-Visual Studio: Ensure Visual Studio is installed.
+### Prerequisites
 
-Phaser.js: The game is built with Phaser.js, and all required libraries are included in the project files.
+- **Visual Studio**: Ensure Visual Studio is installed.
+- **Phaser.js**: The game is built with Phaser.js, and all required libraries are included in the project files.
 
-**Steps to Run the Game**
+### Steps to Run the Game
 
-Clone the Repository:
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/nav3112/SoftwareProject/edit/main
+   cd main
+   ```
 
-bash
+2. **Open in Visual Studio**:
+   - Launch Visual Studio.
+   - Open the project folder.
 
-Copy code
+3. **Run the Game**:
+   - Select the `index.html` file in the project directory.
+   - Click the "Run" or "Debug" option in Visual Studio to start the game in your default browser.
 
-git clone https://github.com/nav3112/SoftwareProject/edit/main
+---
 
-cd main
+## Gameplay Overview
 
-Open in Visual Studio:
+### Topics and Levels
 
-Launch Visual Studio.
+#### Topic 1: Renewable Energy
+- **Level 1**: Generate energy by placing solar panels on buildings.
+- **Level 2**: Collect and dispose of waste floating in a river using a boat.
+- **Quiz**: Test your knowledge about energy and waste management.
 
-Open the project folder.
+#### Topic 2: Waste Management
+- **Level 1**: Sort waste into appropriate categories and unlock rewards.
+- **Level 2**: Plant seeds and grow plants to learn about composting and greenery.
+- **Level 3**: Quiz on waste management and planting.
 
-Run the Game:
+#### Topic 3: Advanced Waste Sorting
+- Engage in complex waste sorting to reinforce recycling principles.
 
-Select the index.html file in the project directory.
+#### Topic 4: Air Pollution
+- **Level 1**: Identify air pollution causes using a pollution finder tool.
+- **Level 2**: Plant trees and greenery to reduce air pollution.
+- **Level 3**: Discover and implement methods to prevent air pollution.
+- **Level 4**: Quiz on air pollution and its prevention.
 
-Click the "Run" or "Debug" option in Visual Studio to start the game in your default browser.
+---
 
-**Gameplay Overview**
+## Features and Highlights
 
-Topics and Levels
+- **Educational Modules**: Learn sustainability concepts through engaging gameplay.
+- **Interactive Quizzes**: Test your knowledge at the end of each topic.
+- **Rewards System**: Unlock badges and achievements for eco-friendly actions.
+- **Realistic Gameplay**: Use tools like boats, pollution finders, and solar panels.
 
-Topic 1: Renewable Energy
+---
 
-Level 1: Generate energy by placing solar panels on buildings.
+## Documentation
 
-Level 2: Collect and dispose of waste floating in a river using a boat.
+### Installation and Setup
+Detailed installation steps are provided above and in `installation.md`.
 
-Quiz: Test your knowledge about energy and waste management.
+### User Guide
+Instructions for gameplay and navigation are provided in `user_guide.md`.
 
-Topic 2: Waste Management
+---
 
-Level 1: Sort waste into appropriate categories and unlock rewards.
-
-Level 2: Plant seeds and grow plants to learn about composting and greenery.
-
-Level 3: Quiz on waste management and planting.
-
-Topic 3: Advanced Waste Sorting
-
-Engage in complex waste sorting to reinforce recycling principles.
-
-Topic 4: Air Pollution
-
-Level 1: Identify air pollution causes using a pollution finder tool.
-
-Level 2: Plant trees and greenery to reduce air pollution.
-
-Level 3: Discover and implement methods to prevent air pollution.
-
-Level 4: Quiz on air pollution and its prevention.
-
-**Features and Highlights**
-
-Educational Modules: Learn sustainability concepts through engaging gameplay.
-
-Interactive Quizzes: Test your knowledge at the end of each topic.
-
-Rewards System: Unlock badges and achievements for eco-friendly actions.
-
-Realistic Gameplay: Use tools like boats, pollution finders, and solar panels.
-
-**Documentation**
-
-Installation and Setup
-
-Detailed installation steps are provided above and in installation.md
-
-**User Guide**
-
-Instructions for gameplay and navigation are provided in user_guide.md
-
-Credits
+## Credits
 
 **Developed by Team 2 (Webyte) as part of the CST8334 Software Development Project:**
-
-Navjot Kaur
-
-Savio Gopuran Babu
-
-Nouraldin Hassan
-
-Lijoy Victor John Lekha
-
-Khushpreet Kaur
+- Navjot Kaur
+- Savio Gopuran Babu
+- Nouraldin Hassan
+- Lijoy Victor John Lekha
+- Khushpreet Kaur
