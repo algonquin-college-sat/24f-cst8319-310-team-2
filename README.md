@@ -36,12 +36,12 @@ Eco-Adventures is a browser-based educational game built with Phaser.js. Designe
 
 ### Topics and Levels
 
-#### Topic 1: Basic Waste Sorting (by Nour)
+#### Topic 1: Basic Waste Sorting (by Navjot)
 - **Level 1**: Drag and drop waste into the correct bins.
 - **Level 2**: Use a bin to catch falling waste and sort it correctly.
 - **Quiz**: Test your knowledge about waste sorting.
 
-#### Topic 2: Renewable Energy (by Navjot)
+#### Topic 2: Renewable Energy (by Nour)
 - **Level 1**: Generate energy by placing solar panels on buildings.
 - **Level 2**: Collect and dispose of waste floating in a river using a boat.
 - **Quiz**: Test your knowledge about energy and waste management.
