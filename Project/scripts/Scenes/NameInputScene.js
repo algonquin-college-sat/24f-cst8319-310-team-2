@@ -58,6 +58,21 @@ class NameInputScene extends Phaser.Scene {
           this.scene.start(savedProgress.currentScene, savedProgress); // Resume game with saved progress
         });
 
+        // Demo to a Scene Button 
+        this.add
+        .text(this.scale.width / 2, 400, "Demo: Planet 3", {
+          fontSize: "24px",
+          color: "#0f0",
+          backgroundColor: "#000",
+          padding: { x: 10, y: 5 },
+        })
+        .setOrigin(0.5)
+        .setInteractive()
+        .on("pointerdown", () => {
+          this.sound.play("clickSound"); // Play click sound
+          this.scene.start("Planet3Level1");
+        });
+
       // Start Fresh Button
       this.add
         .text(this.scale.width / 2, 350, "Start Fresh", {

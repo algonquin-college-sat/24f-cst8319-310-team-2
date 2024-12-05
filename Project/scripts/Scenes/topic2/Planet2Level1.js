@@ -396,4 +396,15 @@ materials.forEach(material => {
             });
         }
     }
+    saveProgress() {
+        // Save current progress to localStorage
+        localStorage.setItem(
+            "playerProgress",
+            JSON.stringify({
+            currentScene: "Planet2Level1",
+            currentDialogueIndex: this.currentDialogueIndex,
+            isShaking: this.isShaking,
+            })
+        );
+    }
 }    

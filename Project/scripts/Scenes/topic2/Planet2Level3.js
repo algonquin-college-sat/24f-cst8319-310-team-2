@@ -258,13 +258,15 @@ this.add.graphics()
             weDidItVideo.play();
                 // Transition to the next scene after the video ends
                 weDidItVideo.on("complete", () => {
-                    window.location.href = "../../savio/SoftwareProject-Savio-GB/Eco-Adv/index.html"; // Replace with the next scene's key
+                    //window.location.href = "../../savio/SoftwareProject-Savio-GB/Eco-Adv/index.html"; // Replace with the next scene's key
+                    this.scene.start("Planet3Level1");
                 });
     
                 // Handle video playback error
                 weDidItVideo.on("error", () => {
                     console.error("Video playback error");
-                    window.location.href = "../../savio/SoftwareProject-Savio-GB/Eco-Adv/index.html";
+                    //window.location.href = "../../savio/SoftwareProject-Savio-GB/Eco-Adv/index.html";
+                    this.scene.start("Planet3Level1");
                 });
             });
         } else {
@@ -273,5 +275,16 @@ this.add.graphics()
                 this.scene.restart();
             });
         }
+    }
+    saveProgress() {
+        // Save current progress to localStorage
+        localStorage.setItem(
+            "playerProgress",
+            JSON.stringify({
+            currentScene: "Planet2Level3",
+            currentDialogueIndex: this.currentDialogueIndex,
+            isShaking: this.isShaking,
+            })
+        );
     }
 }    

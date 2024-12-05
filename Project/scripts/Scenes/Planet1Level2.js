@@ -230,4 +230,15 @@ class Planet1Level2 extends Phaser.Scene {
 
     this.time.delayedCall(5000, () => helpText.destroy());
   }
+  saveProgress() {
+    // Save current progress to localStorage
+    localStorage.setItem(
+      "playerProgress",
+      JSON.stringify({
+        currentScene: "Planet1Level2",
+        currentDialogueIndex: this.currentDialogueIndex,
+        isShaking: this.isShaking,
+      })
+    );
+  }
 }

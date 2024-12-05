@@ -195,4 +195,15 @@ class Planet2Level2 extends Phaser.Scene {
             });
         });
     }
+    saveProgress() {
+        // Save current progress to localStorage
+        localStorage.setItem(
+            "playerProgress",
+            JSON.stringify({
+            currentScene: "Planet2Level2",
+            currentDialogueIndex: this.currentDialogueIndex,
+            isShaking: this.isShaking,
+            })
+        );
+    }
 }    
