@@ -44,11 +44,15 @@ class Planet1Level3 extends Phaser.Scene {
       this.load.audio("lvl1correctSound", "assets/lvl1correctSound.mp3");
       this.load.audio("lvl1wrongSound", "assets/lvl1wrongSound.mp3");
       this.load.audio("lvl1rewardSound", "assets/lvl1rewardSound.mp3");
+      this.load.audio("lvl3backgroundMusic", "assets/lvl1backgroundMusic.mp3");
     }
   
     create() {
       // Shuffle questions at the start
       this.shuffleQuestions();
+
+      this.backgroundMusic = this.sound.add("lvl3backgroundMusic", { loop: true, volume: 0.3 });
+      this.backgroundMusic.play();
   
       // Display the background
       this.add

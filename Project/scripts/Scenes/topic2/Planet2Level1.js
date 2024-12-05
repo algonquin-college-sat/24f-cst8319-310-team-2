@@ -387,6 +387,7 @@ materials.forEach(material => {
                                 alpha: 0, // Fade out
                                 duration: 2000,
                                 onComplete: () => {
+                                    this.backgroundMusic.stop();
                                     this.scene.start("Planet2Level2"); // Transition to Level 2
                                 },
                             });

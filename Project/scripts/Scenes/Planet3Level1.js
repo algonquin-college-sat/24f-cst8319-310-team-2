@@ -9,14 +9,14 @@ class Planet3Level1 extends Phaser.Scene {
 
     preload() {
         this.load.image('bg', 'assets/bg.jpg');
-        this.load.image('solarPanel', 'assets/solar-panel.png');
+        this.load.image('solar-panel', 'assets/solar-panel.png');
         this.load.image('building1', 'assets/building1.png');
         this.load.image('building2', 'assets/building2.png');
         this.load.image('building3', 'assets/building3.png');
         this.load.image('building4', 'assets/building4.png');
         this.load.image('building5', 'assets/building5.png');
         this.load.image('powerGrid', 'assets/power-grid.png');
-        this.load.audio("lvl1backgroundMusic", "assets/lvl1backgroundMusic.mp3");
+        this.load.audio("lvl1backgroundMusic", "assets/background.mp3");
         this.load.audio("lvl1correctSound", "assets/lvl1correctSound.mp3");
         this.load.audio("lvl1wrongSound", "assets/lvl1wrongSound.mp3");
         this.load.audio("lvl1rewardSound", "assets/lvl1rewardSound.mp3");
@@ -24,6 +24,9 @@ class Planet3Level1 extends Phaser.Scene {
     }
 
     create() {
+        this.backgroundMusic = this.sound.add("lvl1backgroundMusic", { loop: true, volume: 1 });
+        this.backgroundMusic.play();
+
         this.add.image(this.scale.width / 2, this.scale.height / 2, 'bg')
             .setDisplaySize(this.scale.width, this.scale.height)
             .setOrigin(0.5);
@@ -77,8 +80,8 @@ class Planet3Level1 extends Phaser.Scene {
 
         // Create draggable solar panels
         for (let i = 0; i < 5; i++) {
-            let panel = this.add.image(100 + i * 60, this.scale.height - 100, 'solarPanel')
-                .setScale(0.125)
+            let panel = this.add.image(100 + i * 60, this.scale.height - 100, 'solar-panel')
+                .setScale(0.1)
                 .setInteractive({ draggable: true });
 
             this.input.setDraggable(panel);
@@ -139,6 +142,7 @@ class Planet3Level1 extends Phaser.Scene {
             }).setOrigin(0.5).setInteractive();
             menuButton.on('pointerdown', () => {
                 this.sound.play("clickSound");
+                this.backgroundMusic.stop();
                 this.scene.start('MainMenu');
             });
 
@@ -148,6 +152,7 @@ class Planet3Level1 extends Phaser.Scene {
                 backgroundColor: '#555'
             }).setOrigin(0.5).setInteractive();
             replayButton.on('pointerdown', () => {
+                this.backgroundMusic.stop();
                 this.sound.play("clickSound");
                 this.scene.restart();
             });
@@ -158,6 +163,7 @@ class Planet3Level1 extends Phaser.Scene {
                 backgroundColor: '#ffff00'
             }).setOrigin(0.5).setInteractive();
             nextLevelButton.on('pointerdown', () => {
+                this.backgroundMusic.stop();
                 this.sound.play("clickSound");
                 this.scene.start('Planet3Level2');
             });

@@ -58,9 +58,22 @@ class NameInputScene extends Phaser.Scene {
           this.scene.start(savedProgress.currentScene, savedProgress); // Resume game with saved progress
         });
 
-        // Demo to a Scene Button 
-        this.add
-        .text(this.scale.width / 2, 400, "Demo: Planet 3", {
+        // Jump to a Scene Button (Planet 3; For Demo Purposes)
+        this.add.text(this.scale.width / 2, 400, "Jump to Planet 2", {
+          fontSize: "24px",
+          color: "#0f0",
+          backgroundColor: "#000",
+          padding: { x: 10, y: 5 },
+        })
+        .setOrigin(0.5)
+        .setInteractive()
+        .on("pointerdown", () => {
+          this.sound.play("clickSound"); // Play click sound
+          this.scene.start("Scene1");
+        });
+
+        // Jump to a Scene Button (Planet 3; For Demo Purposes)
+        this.add.text(this.scale.width / 2, 450, "Jump to Planet 3", {
           fontSize: "24px",
           color: "#0f0",
           backgroundColor: "#000",
@@ -71,6 +84,20 @@ class NameInputScene extends Phaser.Scene {
         .on("pointerdown", () => {
           this.sound.play("clickSound"); // Play click sound
           this.scene.start("Planet3Level1");
+        });
+
+        // Jump to a Scene Button (Planet 3 Level 3; For Demo Purposes)
+        this.add.text(this.scale.width / 2 + 350, 450, "Jump to Planet 3 Level 3", {
+          fontSize: "24px",
+          color: "#0f0",
+          backgroundColor: "#000",
+          padding: { x: 10, y: 5 },
+        })
+        .setOrigin(0.5)
+        .setInteractive()
+        .on("pointerdown", () => {
+          this.sound.play("clickSound"); // Play click sound
+          this.scene.start("Planet3Level3");
         });
 
       // Start Fresh Button

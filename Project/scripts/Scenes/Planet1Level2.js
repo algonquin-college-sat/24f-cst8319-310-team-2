@@ -40,7 +40,7 @@ class Planet1Level2 extends Phaser.Scene {
 
     // Play background music
     this.backgroundMusic = this.sound.add("lvl2backgroundMusic", { loop: true, volume: 0.3 });
-    // this.backgroundMusic.play();
+    this.backgroundMusic.play();
 
     // Create bins
     this.createBins();
@@ -207,7 +207,10 @@ class Planet1Level2 extends Phaser.Scene {
 
     this.sound.play("lvl2rewardSound");
     localStorage.removeItem("level2Progress");
-    this.time.delayedCall(3000, () => this.scene.start("Planet1Level3"));
+    this.time.delayedCall(3000, () => {
+      this.backgroundMusic.stop();
+      this.scene.start("Planet1Level3")}
+    ); 
   }
 
   addHelpButton() {

@@ -8,7 +8,7 @@ class Planet3Level3 extends Phaser.Scene {
     preload() {
         this.load.image('bg', 'assets/bg.jpg');
         this.load.image('button', 'assets/button.png');
-        this.load.audio("lvl3backgroundMusic", "assets/lvl1backgroundMusic.mp3");
+        this.load.audio("lvl3backgroundMusic", "assets/background.mp3");
         this.load.audio("lvl3correctSound", "assets/lvl1correctSound.mp3");
         this.load.audio("lvl3wrongSound", "assets/lvl1wrongSound.mp3");
         this.load.audio("lvl3rewardSound", "assets/lvl1rewardSound.mp3");
@@ -16,70 +16,79 @@ class Planet3Level3 extends Phaser.Scene {
     }
 
     create() {
+        this.backgroundMusic = this.sound.add("lvl3backgroundMusic", { loop: true, volume: 1 });
+        this.backgroundMusic.play();
+    
         // Initialize values using the registry
         this.registry.set('score', 0);
         this.registry.set('wrongAnswers', 0);
         this.registry.set('currentQuestionIndex', 0);
-
+    
         // Background
         let bg = this.add.image(this.scale.width / 2, this.scale.height / 2, 'bg');
         bg.setScale(this.scale.width / bg.width);
-
+    
         // Title
         this.add.text(this.scale.width / 2, 50, 'Quiz Show!', {
             fontSize: '36px',
             fill: '#ffffff',
             fontStyle: 'bold'
         }).setOrigin(0.5);
-
+    
         // Instruction
         this.add.text(this.scale.width / 2, 100, 'Answer questions about renewable energy to win!', {
             fontSize: '24px',
             fill: '#ffff00'
         }).setOrigin(0.5);
-
+    
         // Initialize questions
         this.questions = this.generateQuestions();
         this.shuffleArray(this.questions); // Shuffle the questions
         this.displayQuestion();
-
+    
         // Score Text
         this.scoreText = this.add.text(20, 20, `Score: ${this.registry.get('score')}`, {
             fontSize: '24px',
             fill: '#ffffff'
         });
-
+    
         // Wrong Answer Counter
         this.wrongText = this.add.text(this.scale.width - 200, 20, `Mistakes: ${this.registry.get('wrongAnswers')}/3`, {
             fontSize: '24px',
             fill: '#ff0000'
         });
-
-        // Event listener for next question
+    
+        // Create a group to track quiz buttons
+        this.quizButtons = this.add.group();
+    
+        // Event listener for quiz answer buttons only
         this.input.on('gameobjectdown', (pointer, button) => {
-            if (button.correct) {
-                this.sound.play("lvl3correctSound");
-                let score = this.registry.get('score');
-                this.registry.set('score', score + 10);
-                this.scoreText.setText(`Score: ${this.registry.get('score')}`);
-            } else {
-                this.sound.play("lvl3wrongSound");
-                let wrongAnswers = this.registry.get('wrongAnswers');
-                this.registry.set('wrongAnswers', wrongAnswers + 1);
-                this.wrongText.setText(`Mistakes: ${this.registry.get('wrongAnswers')}/3`);
-            }
-
-            // Check if player has reached 3 mistakes
-            if (this.registry.get('wrongAnswers') >= 3) {
-                this.showFailure();
-            } else {
-                let currentQuestionIndex = this.registry.get('currentQuestionIndex');
-                this.registry.set('currentQuestionIndex', currentQuestionIndex + 1);
-                this.displayQuestion();
+            // Check if the clicked button is part of the quiz
+            if (this.quizButtons.contains(button)) {
+                if (button.correct) {
+                    this.sound.play("lvl3correctSound");
+                    let score = this.registry.get('score');
+                    this.registry.set('score', score + 10);
+                    this.scoreText.setText(`Score: ${this.registry.get('score')}`);
+                } else {
+                    this.sound.play("lvl3wrongSound");
+                    let wrongAnswers = this.registry.get('wrongAnswers');
+                    this.registry.set('wrongAnswers', wrongAnswers + 1);
+                    this.wrongText.setText(`Mistakes: ${this.registry.get('wrongAnswers')}/3`);
+                }
+    
+                // Check if player has reached 3 mistakes
+                if (this.registry.get('wrongAnswers') >= 3) {
+                    this.showFailure();
+                } else {
+                    let currentQuestionIndex = this.registry.get('currentQuestionIndex');
+                    this.registry.set('currentQuestionIndex', currentQuestionIndex + 1);
+                    this.displayQuestion();
+                }
             }
         });
     }
-
+    
     displayQuestion() {
         // Clear existing question and answers
         if (this.questionText) this.questionText.destroy();
@@ -111,24 +120,25 @@ class Planet3Level3 extends Phaser.Scene {
         // Randomize the order of the answers
         this.shuffleArray(question.answers);
     
-        // Display answer options
+        // Create and display answer buttons
         this.answerButtons = [];
         question.answers.forEach((answer, index) => {
+            // Create the button sprite
             let button = this.add.sprite(
                 this.scale.width / 2,
                 300 + index * 80,
                 'button'
             ).setInteractive();
             button.setScale(1, 0.6);
+            button.correct = answer.correct; // Store if this is the correct answer
     
+            // Create the text for the button
             let buttonText = this.add.text(button.x, button.y, answer.text, {
                 fontSize: '20px',
                 fill: '#000'
             }).setOrigin(0.5);
     
-            button.correct = answer.correct;
-    
-            // Add hover effects for style and font size
+            // Add hover effects for the button
             button.on('pointerover', () => {
                 buttonText.setStyle({ fontStyle: 'bold', fill: '#C6981F', fontSize: '24px' });
                 button.setScale(1.2, 0.8);
@@ -139,10 +149,35 @@ class Planet3Level3 extends Phaser.Scene {
                 button.setScale(1, 0.6);
             });
     
+            // Add click interaction for the button
+            button.on('pointerdown', () => {
+                if (button.correct) {
+                    this.sound.play("lvl3correctSound");
+                    let score = this.registry.get('score');
+                    this.registry.set('score', score + 10);
+                    this.scoreText.setText(`Score: ${this.registry.get('score')}`);
+                } else {
+                    this.sound.play("lvl3wrongSound");
+                    let wrongAnswers = this.registry.get('wrongAnswers');
+                    this.registry.set('wrongAnswers', wrongAnswers + 1);
+                    this.wrongText.setText(`Mistakes: ${this.registry.get('wrongAnswers')}/3`);
+                }
+    
+                // Check if player has reached 3 mistakes
+                if (this.registry.get('wrongAnswers') >= 3) {
+                    this.showFailure();
+                } else {
+                    let currentQuestionIndex = this.registry.get('currentQuestionIndex');
+                    this.registry.set('currentQuestionIndex', currentQuestionIndex + 1);
+                    this.displayQuestion();
+                }
+            });
+    
             // Add button and text to the answerButtons array for cleanup later
-            this.answerButtons.push(button, buttonText);
+            this.answerButtons.push(button);
+            this.answerButtons.push(buttonText);
         });
-    }
+    }        
     
     showCompletion() {
         // Hide question and answers before showing completion screen
@@ -178,6 +213,7 @@ class Planet3Level3 extends Phaser.Scene {
             backgroundColor: '#333'
         }).setOrigin(0.5).setInteractive();
         menuButton.on('pointerdown', () => {
+            this.backgroundMusic.stop();
             this.sound.play("clickSound");
             this.scene.start('MainMenu');
         });
@@ -188,6 +224,7 @@ class Planet3Level3 extends Phaser.Scene {
             backgroundColor: '#555'
         }).setOrigin(0.5).setInteractive();
         replayButton.on('pointerdown', () => {
+            this.backgroundMusic.stop();
             this.sound.play("clickSound");
             this.restartScene(); // Use the restartScene function
         });
@@ -198,8 +235,9 @@ class Planet3Level3 extends Phaser.Scene {
             backgroundColor: '#ffff00'
         }).setOrigin(0.5).setInteractive();
         nextLevelButton.on('pointerdown', () => {
+            this.backgroundMusic.stop();
             this.sound.play("clickSound");
-            this.scene.start('Planet4Level1');
+            this.scene.start('Planet4IntroScene');
         });
     }
 
@@ -237,6 +275,8 @@ class Planet3Level3 extends Phaser.Scene {
             backgroundColor: '#333'
         }).setOrigin(0.5).setInteractive();
         retryButton.on('pointerdown', () => {
+            this.backgroundMusic.stop();
+            this.sound.play("clickSound");
             this.restartScene(); // Use the restartScene function
         });
     }
@@ -246,6 +286,7 @@ class Planet3Level3 extends Phaser.Scene {
         this.registry.set('currentQuestionIndex', 0);
         this.registry.set('score', 0);
         this.registry.set('wrongAnswers', 0);
+        this.levelComplete = false; 
 
         // Restart the scene
         this.scene.restart();
