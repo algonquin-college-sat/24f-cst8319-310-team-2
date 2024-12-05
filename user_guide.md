@@ -1,4 +1,3 @@
-
 # User Guide for Eco-Adventures
 
 Welcome to Eco-Adventures! This guide will help you navigate and play the game effectively.
@@ -7,7 +6,24 @@ Welcome to Eco-Adventures! This guide will help you navigate and play the game e
 
 ## Gameplay Instructions
 
-### Topic 1: Renewable Energy
+### Topic 1: Basic Waste Sorting
+#### Level 1: Drag and Drop
+- **Objective**: Drag and drop waste items into the correct bins.
+- **Controls**: Use the **mouse** to drag and drop items.
+- **Goal**: Sort all waste correctly to progress.
+
+#### Level 2: Catch Waste with Bin
+- **Objective**: Use a bin to catch falling waste and sort it correctly.
+- **Controls**: Use the **mouse pad** to click and drag the bin.
+- **Goal**: Catch and sort all waste correctly to proceed.
+
+#### Level 3: Quiz
+- **Objective**: Answer multiple-choice questions related to waste sorting.
+- **Controls**: Use the **mouse** to select answers.
+
+---
+
+### Topic 2: Renewable Energy
 #### Level 1: Generate Energy
 - **Objective**: Place solar panels on buildings to generate energy.
 - **Controls**: Use the **mouse** to **click and drag** solar panels onto the buildings.
@@ -26,12 +42,10 @@ Welcome to Eco-Adventures! This guide will help you navigate and play the game e
 
 ---
 
-### Topic 2: Waste Management
+### Topic 3: Waste Management
 #### Level 1: Sorting Waste
-- **Objective**: Sort waste into the correct categories. create things to unlock new items and rewards
-- using the resources given.
-- **Controls**: Use the **mouse** to **click and drag** waste to the appropriate bins, resources to unlock
-- additional reward points.
+- **Objective**: Sort waste into the correct categories. Create things to unlock new items and rewards using the resources given.
+- **Controls**: Use the **mouse** to **click and drag** waste to the appropriate bins, resources to unlock additional reward points.
 - **Goal**: Complete sorting tasks to unlock rewards.
 
 #### Level 2: Planting Seeds
@@ -46,7 +60,7 @@ Welcome to Eco-Adventures! This guide will help you navigate and play the game e
 
 ---
 
-### Topic 3: Advanced Waste Sorting
+### Topic 4: Advanced Waste Sorting
 #### Level 1: Explore and Clean
 - **Objective**: Navigate two pages, clean up waste, and sort it into bins.
 - **Controls**:
@@ -59,7 +73,7 @@ Welcome to Eco-Adventures! This guide will help you navigate and play the game e
 
 ---
 
-### Topic 4: Air Pollution
+### Topic 5: Air Pollution
 #### Level 1: Finding Pollution Causes
 - **Objective**: Use a pollution finder to identify causes of air pollution.
 - **Controls**:

@@ -68,16 +68,19 @@ If you encounter any issues, feel free to raise an issue in the repository or co
 The game is organized into levels, and each contributor has developed the following directories for their respective levels:
 
 - **Navjot**: `levels/navjot/`
-  - Contains code and assets for the levels navjot contributed, Topic 1.
+  - Contains code and assets for the basic waste sorting levels in Topic 1. This includes drag-and-drop waste sorting and catching waste with bins.
+
+- **Nour**: `levels/nour/`
+  - Contains code and assets for the levels navjot contributed, Topic 2.
 
 - **Kushi**: `levels/kushi/`
-  - Includes all files related to the levels Kushi designed, such as Topic 2's planting and sorting waste tasks.
+  - Includes all files related to the levels Kushi designed, such as Topic 3's planting and sorting waste tasks.
 
 - **Savio**: `levels/savio/`
-  - Features levels for Topic 3 and the initial design of the sorting waste game mechanics.
+  - Features levels for Topic 4 and the initial design of the sorting waste game mechanics.
 
 - **Lijoy**: `levels/lijoy/`
-  - Covers Topic 4, including the air pollution finder and methods to prevent pollution.
+  - Covers Topic 5, including the air pollution finder and methods to prevent pollution.
 
 Each directory contains the scripts, assets, and configurations specific to the respective levels.
 
