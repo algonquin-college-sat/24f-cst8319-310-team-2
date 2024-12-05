@@ -177,7 +177,7 @@ class Planet1Level1 extends Phaser.Scene {
   updateScore() {
     this.scoreText.setText(`Score: ${this.score}/5`);
     if (this.score === 5) {
-      this.backgroundMusic.stop();
+      // this.backgroundMusic.stop();
       this.endLevel();
     } else {
       this.saveProgress();

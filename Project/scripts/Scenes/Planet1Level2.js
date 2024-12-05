@@ -40,7 +40,7 @@ class Planet1Level2 extends Phaser.Scene {
 
     // Play background music
     this.backgroundMusic = this.sound.add("lvl2backgroundMusic", { loop: true, volume: 0.3 });
-    this.backgroundMusic.play();
+    // this.backgroundMusic.play();
 
     // Create bins
     this.createBins();

@@ -95,6 +95,7 @@ class IntroductionScene extends Phaser.Scene {
       .setOrigin(0.5)
       .setInteractive()
       .on("pointerdown", () => {
+        this.sound.play("clickSound");
         this.scene.start("Planet1Level1"); // Transition to the first level
       });
   }

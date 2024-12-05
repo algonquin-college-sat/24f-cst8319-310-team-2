@@ -171,6 +171,7 @@ class Planet1Level3 extends Phaser.Scene {
   
       // After a delay, proceed to the next level (Level 4)
       this.time.delayedCall(3000, () => {
+        this.backgroundMusic.stop();
         this.scene.start("Scene1"); // Transition to the next planet
       });
     }

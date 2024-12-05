@@ -4,6 +4,7 @@ class Planet3Level1 extends Phaser.Scene {
         this.solarPanels = [];
         this.grid = [];
         this.buildingsPowered = 0;
+        this.levelComplete = false;
     }
 
     preload() {
@@ -117,19 +118,20 @@ class Planet3Level1 extends Phaser.Scene {
     }
 
     updateCompleteMessage() {
-        if (this.buildingsPowered === this.grid.length) {
-            // this.sound.play("lvl1rewardSound");
+        if (this.buildingsPowered === this.grid.length && !this.levelComplete) {
+            this.levelComplete = true;
+            this.sound.play("lvl1rewardSound");
             this.add.text(this.scale.width / 2, this.scale.height / 2 - 100, 'Level Complete!', {
                 fontSize: '48px',
                 fill: '#ffffff',
                 fontStyle: 'bold'
             }).setOrigin(0.5);
-            this.add.text(this.scale.width / 2, this.scale.height / 2 + 20, 
+            this.add.text(this.scale.width / 2, this.scale.height / 2 + 20,
                 'Reward: "Energy Converter" – allows efficient use of collected energy.', {
                 fontSize: '24px',
                 fill: '#ffff00'
             }).setOrigin(0.5);
-        
+
             let menuButton = this.add.text(this.scale.width / 3, this.scale.height / 2 + 50, 'Menu', {
                 fontSize: '24px',
                 fill: '#ffffff',
@@ -139,7 +141,7 @@ class Planet3Level1 extends Phaser.Scene {
                 this.sound.play("clickSound");
                 this.scene.start('MainMenu');
             });
-        
+
             let replayButton = this.add.text(this.scale.width / 2, this.scale.height / 2 + 50, 'Replay', {
                 fontSize: '24px',
                 fill: '#ffffff',
@@ -149,7 +151,7 @@ class Planet3Level1 extends Phaser.Scene {
                 this.sound.play("clickSound");
                 this.scene.restart();
             });
-        
+
             let nextLevelButton = this.add.text((this.scale.width / 3) * 2, this.scale.height / 2 + 50, 'Next Level', {
                 fontSize: '24px',
                 fill: '#000000',
@@ -164,17 +166,5 @@ class Planet3Level1 extends Phaser.Scene {
 
     update() {
         this.updateCompleteMessage();
-    }
-
-    saveProgress() {
-        // Save current progress to localStorage
-        localStorage.setItem(
-            "playerProgress",
-            JSON.stringify({
-            currentScene: "Planet3Level1",
-            currentDialogueIndex: this.currentDialogueIndex,
-            isShaking: this.isShaking,
-            })
-        );
     }
 }

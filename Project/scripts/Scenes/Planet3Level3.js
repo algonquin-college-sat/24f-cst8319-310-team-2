@@ -2,6 +2,7 @@ class Planet3Level3 extends Phaser.Scene {
     constructor() {
         super({ key: 'Planet3Level3' });
         this.questions = [];
+        this.levelComplete = false;
     }
 
     preload() {
@@ -87,7 +88,8 @@ class Planet3Level3 extends Phaser.Scene {
         }
     
         // Check if there are no more questions
-        if (this.registry.get('currentQuestionIndex') >= this.questions.length) {
+        if (this.registry.get('currentQuestionIndex') >= this.questions.length && !this.levelComplete) {
+            this.levelComplete = true;
             this.showCompletion();
             return;
         }
@@ -148,7 +150,7 @@ class Planet3Level3 extends Phaser.Scene {
         if (this.answerButtons) {
             this.answerButtons.forEach(button => button.destroy());
         }
-
+        this.sound.play("lvl3rewardSound");
         // Display completion message
         this.add.text(
             this.scale.width / 2,

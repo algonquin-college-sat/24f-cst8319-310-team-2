@@ -8,6 +8,7 @@ class Planet3Level2 extends Phaser.Scene {
         this.score = 0;
         this.trashCollected = 0;
         this.inventory = null;
+        this.levelComplete = false;
 
         // Mapping of trash texture keys to unique names
         this.trashNames = {
@@ -126,8 +127,9 @@ class Planet3Level2 extends Phaser.Scene {
 
         this.scoreText.setText('Score: ' + this.score);
 
-        if (this.trashCollected === 5) {
-            // this.sound.play("lvl2rewardSound");
+        if (this.trashCollected === 5 && !this.levelComplete) {
+            this.levelComplete = true;
+            this.sound.play("lvl2rewardSound");
             this.add.text(this.scale.width / 2, this.scale.height / 2 - 100, 'Level Complete!', {
                 fontSize: '48px',
                 fill: '#ffffff',
