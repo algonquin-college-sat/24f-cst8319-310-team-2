@@ -68,6 +68,9 @@ If you encounter any issues, feel free to raise an issue in the repository or co
 The game is organized into levels, and each contributor has developed the following directories for their respective levels:
 
 - **Navjot**: `levels/navjot/`
+  - Contains code and assets for the basic waste sorting levels in Topic 1. This includes drag-and-drop waste sorting and catching waste with bins.
+
+- **Nour**: `levels/nour/`
   - Contains code and assets for the levels navjot contributed, Topic 1.
 
 - **Kushi**: `levels/kushi/`
