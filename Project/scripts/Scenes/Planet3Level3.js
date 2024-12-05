@@ -2,11 +2,17 @@ class Planet3Level3 extends Phaser.Scene {
     constructor() {
         super({ key: 'Planet3Level3' });
         this.questions = [];
+        this.levelComplete = false;
     }
 
     preload() {
-        this.load.image('quiz-background', 'assets/bg.jpg');
+        this.load.image('bg', 'assets/bg.jpg');
         this.load.image('button', 'assets/button.png');
+        this.load.audio("lvl3backgroundMusic", "assets/lvl1backgroundMusic.mp3");
+        this.load.audio("lvl3correctSound", "assets/lvl1correctSound.mp3");
+        this.load.audio("lvl3wrongSound", "assets/lvl1wrongSound.mp3");
+        this.load.audio("lvl3rewardSound", "assets/lvl1rewardSound.mp3");
+        this.load.audio("clickSound", "assets/clickSound.mp3");
     }
 
     create() {
@@ -16,7 +22,7 @@ class Planet3Level3 extends Phaser.Scene {
         this.registry.set('currentQuestionIndex', 0);
 
         // Background
-        let bg = this.add.image(this.scale.width / 2, this.scale.height / 2, 'quiz-background');
+        let bg = this.add.image(this.scale.width / 2, this.scale.height / 2, 'bg');
         bg.setScale(this.scale.width / bg.width);
 
         // Title
@@ -52,10 +58,12 @@ class Planet3Level3 extends Phaser.Scene {
         // Event listener for next question
         this.input.on('gameobjectdown', (pointer, button) => {
             if (button.correct) {
+                this.sound.play("lvl3correctSound");
                 let score = this.registry.get('score');
                 this.registry.set('score', score + 10);
                 this.scoreText.setText(`Score: ${this.registry.get('score')}`);
             } else {
+                this.sound.play("lvl3wrongSound");
                 let wrongAnswers = this.registry.get('wrongAnswers');
                 this.registry.set('wrongAnswers', wrongAnswers + 1);
                 this.wrongText.setText(`Mistakes: ${this.registry.get('wrongAnswers')}/3`);
@@ -80,7 +88,8 @@ class Planet3Level3 extends Phaser.Scene {
         }
     
         // Check if there are no more questions
-        if (this.registry.get('currentQuestionIndex') >= this.questions.length) {
+        if (this.registry.get('currentQuestionIndex') >= this.questions.length && !this.levelComplete) {
+            this.levelComplete = true;
             this.showCompletion();
             return;
         }
@@ -141,7 +150,7 @@ class Planet3Level3 extends Phaser.Scene {
         if (this.answerButtons) {
             this.answerButtons.forEach(button => button.destroy());
         }
-
+        this.sound.play("lvl3rewardSound");
         // Display completion message
         this.add.text(
             this.scale.width / 2,
@@ -169,6 +178,7 @@ class Planet3Level3 extends Phaser.Scene {
             backgroundColor: '#333'
         }).setOrigin(0.5).setInteractive();
         menuButton.on('pointerdown', () => {
+            this.sound.play("clickSound");
             this.scene.start('MainMenu');
         });
 
@@ -178,6 +188,7 @@ class Planet3Level3 extends Phaser.Scene {
             backgroundColor: '#555'
         }).setOrigin(0.5).setInteractive();
         replayButton.on('pointerdown', () => {
+            this.sound.play("clickSound");
             this.restartScene(); // Use the restartScene function
         });
 
@@ -187,6 +198,7 @@ class Planet3Level3 extends Phaser.Scene {
             backgroundColor: '#ffff00'
         }).setOrigin(0.5).setInteractive();
         nextLevelButton.on('pointerdown', () => {
+            this.sound.play("clickSound");
             this.scene.start('Planet4Level1');
         });
     }

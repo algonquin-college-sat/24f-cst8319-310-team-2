@@ -8,6 +8,7 @@ class Planet3Level2 extends Phaser.Scene {
         this.score = 0;
         this.trashCollected = 0;
         this.inventory = null;
+        this.levelComplete = false;
 
         // Mapping of trash texture keys to unique names
         this.trashNames = {
@@ -26,6 +27,11 @@ class Planet3Level2 extends Phaser.Scene {
         this.load.image('river-background', 'assets/river-background.jpg');
         this.load.image('boat', 'assets/boat.png');
         this.load.image('3bins', 'assets/3bins.png');
+        this.load.audio("lvl2backgroundMusic", "assets/lvl1backgroundMusic.mp3");
+        this.load.audio("lvl2correctSound", "assets/lvl1correctSound.mp3");
+        this.load.audio("lvl2wrongSound", "assets/lvl1wrongSound.mp3");
+        this.load.audio("lvl2rewardSound", "assets/lvl1rewardSound.mp3");
+        this.load.audio("clickSound", "assets/clickSound.mp3");
 
         // Load trash images dynamically
         for (let i = 1; i <= 8; i++) {
@@ -121,7 +127,9 @@ class Planet3Level2 extends Phaser.Scene {
 
         this.scoreText.setText('Score: ' + this.score);
 
-        if (this.trashCollected === 5) {
+        if (this.trashCollected === 5 && !this.levelComplete) {
+            this.levelComplete = true;
+            this.sound.play("lvl2rewardSound");
             this.add.text(this.scale.width / 2, this.scale.height / 2 - 100, 'Level Complete!', {
                 fontSize: '48px',
                 fill: '#ffffff',
@@ -140,6 +148,7 @@ class Planet3Level2 extends Phaser.Scene {
                 backgroundColor: '#333'
             }).setOrigin(0.5).setInteractive();
             menuButton.on('pointerdown', () => {
+                this.sound.play("clickSound");
                 this.scene.start('MainMenu');
             });
 
@@ -149,6 +158,7 @@ class Planet3Level2 extends Phaser.Scene {
                 backgroundColor: '#555'
             }).setOrigin(0.5).setInteractive();
             replayButton.on('pointerdown', () => {
+                this.sound.play("clickSound");
                 this.scene.restart();
             });
 
@@ -158,6 +168,7 @@ class Planet3Level2 extends Phaser.Scene {
                 backgroundColor: '#ffff00'
             }).setOrigin(0.5).setInteractive();
             nextLevelButton.on('pointerdown', () => {
+                this.sound.play("clickSound");
                 this.scene.start('Planet3Level3');
             });
         }
@@ -177,6 +188,7 @@ class Planet3Level2 extends Phaser.Scene {
 
     pickUpTrash(trash) {
         trash.destroy();
+        this.sound.play("lvl2correctSound");
         this.inventory = this.trashNames[trash.texture.key]; // Use the unique name
         this.inventoryText.setText(`Inventory: ${this.inventory}`);
         this.visibleTrash = this.visibleTrash.filter(t => t !== trash);

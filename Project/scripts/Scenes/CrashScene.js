@@ -5,14 +5,14 @@ class CrashScene extends Phaser.Scene {
 
     preload() {
         this.load.image('earth', 'assets/earth.png');  // Potential Favicon
-        this.load.image('background', 'assets/bg.jpg');
+        this.load.image('bg', 'assets/bg.jpg');
         this.load.image('rocket', 'assets/rocket.png');
         this.load.image('stone', 'assets/stone2.png');
         this.load.audio('popSound', 'assets/pop-sound.mp3');
     }
 
     create() {
-        this.add.image(this.scale.width / 2, this.scale.height / 2, 'background').setDisplaySize(this.scale.width, this.scale.height).setOrigin(0.5);
+        this.add.image(this.scale.width / 2, this.scale.height / 2, 'bg').setDisplaySize(this.scale.width, this.scale.height).setOrigin(0.5);
 
         this.popSound = this.sound.add('popSound');
         const stone = this.add.image(640, 360, 'stone');
