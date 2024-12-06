@@ -569,7 +569,7 @@ formatTime(seconds) {
                   finishSound.stop();
                   this.cameras.main.fadeOut(500, 0, 0, 0);
                   this.time.delayedCall(500, () => {
-                      this.scene.start('TransitionScene', { nextScene: 'QuizScene' });
+                      this.scene.start('TransitionScene', { nextScene: 'Planet4Level4' });
                   });
               };
               

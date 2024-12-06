@@ -1,3 +1,8 @@
+function getSceneFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("scene") || "DefaultScene"; // Default to a specific scene if none is provided
+}
+
 const config = {
     type: Phaser.AUTO,
     width: 1280,
@@ -21,6 +26,7 @@ const config = {
 
 const game = new Phaser.Game(config);
 
+game.scene.start(getSceneFromURL());
 // window.addEventListener('resize', () => {
 //     game.scale.resize(window.innerWidth, window.innerHeight);
 // });

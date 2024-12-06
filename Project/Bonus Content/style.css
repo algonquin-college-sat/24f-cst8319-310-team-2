@@ -1,0 +1,608 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #262727;
+  color: white;
+}
+
+/* Start Screen */
+#startScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 10; /* Ensures it is above other elements */
+}
+
+#startScreen h1 {
+  font-size: 3em;
+  color: #ffffff;
+  margin-bottom: 20px; /* Spacing between heading and button */
+  text-align: center;
+}
+
+#startButton {
+  background: linear-gradient(to bottom, #28a745, #218838); /* Glossy green gradient */
+  color: #ffffff;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Initial shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#startButton:hover {
+  transform: scale(1.1); /* Pop effect */
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.5); /* Enhanced shadow on hover */
+}
+
+#startButton:active {
+  transform: scale(1.05); /* Slight shrink when clicked */
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4); /* Slightly smaller shadow */
+}
+
+/* Hover area for the game */
+.hover-area {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  overflow: hidden;
+  display: none; /* Initially hidden */
+}
+
+/* Fixed-size canvas styling */
+canvas {
+  width: 100%;
+  height: 100%;
+  background-image: url("public/assets/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Moving object styling */
+.moving-object {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  background-image: url("public/assets/rocket.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 1;
+}
+
+.animate-rocket {
+  animation: moveAcross 5s ease-in-out forwards;
+}
+
+@keyframes moveAcross {
+  0% {
+    transform: translate(1000px, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 300px);
+    opacity: 1;
+  }
+}
+
+#blackOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 6;
+}
+
+/* Positioning the stone image at the bottom left */
+#stone {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 325px;
+  height: 275px;
+  z-index: 4;
+}
+
+/* Smoke styling with animation */
+#smoke2 {
+  position: absolute;
+  bottom: 300px;
+  left: 100px;
+  width: 300px;
+  height: 300px;
+  display: none;
+}
+
+.animate-smoke {
+  animation: smokeFloat 3s ease-in-out infinite;
+}
+
+@keyframes smokeFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Trash items styling */
+.trash-item {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.trash-item-2 {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+#astronaut {
+  display: none;
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 250px;
+  height: 250px;
+  top: 400px;
+  left: 400px;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 1s ease, transform 0.1s linear;
+}
+
+#board{
+  position: absolute;
+  bottom: 200px;
+  left: 1120px;
+  width: 150px;
+  height: 150px;
+  display:none;
+}
+
+#brokenCan {
+  width: 75px; 
+  height: 75px; 
+  bottom: 150px; 
+  left: 450px; 
+}
+#cardboardBox {
+  width: 200px;
+  height: 150px;
+  bottom: 200px;
+  left: 680px;
+}
+#plasticBottle {
+  width: 125px; 
+  height: 75px;
+  bottom: 120px;
+  left: 700px;
+}
+#glassBottle {
+  width: 120px; 
+  height: 100px;
+  bottom: 75px;
+  left: 850px;
+}
+#foodWrapper {
+  width: 150px; 
+  height: 100px;
+  bottom: 100px;
+  left: 550px;
+}
+#plasticBag {
+  width: 350px; 
+  height: 200px;
+  bottom: -100px;
+  left: 250px;
+  z-index: 4;
+}
+
+#oldShoe {
+  width: 100px;
+  height: 100px;
+  bottom: 170px;
+  left: 1175px;
+}
+
+#crumpledPaper {
+  width: 100px; 
+  height: 50px;
+  bottom: 10px;
+  left: 500px;
+  z-index: 4;
+}
+#rustyCan {
+  width:150px; 
+  height: 100px;
+  bottom: 175px;
+  left: 850px;
+}
+
+#bananaPeel {
+  width: 150px;
+  height: 150px;
+  bottom: 100px;
+  left: 100px;
+}
+
+#brokenEgg {
+  width: 100px;
+  height: 100px;
+  bottom: 150px;
+  left: 300px;
+}
+
+#organicWaste {
+  width: 115px;
+  height: 115px;
+  bottom: 160px;
+  left: 450px;
+}
+
+#oldCup {
+  width: 100px;
+  height: 100px;
+  bottom: -10px;
+  left: 200px;
+  z-index:4;
+}
+
+#milkCarton {
+  width: 100px;
+  height: 100px;
+  bottom: -10px;
+  left: 400px;
+  z-index:4;
+}
+
+#pizzaBox {
+  width: 100px;
+  height: 100px;
+  bottom: 160px;
+  left: 600px;
+}
+
+#Next, #Next2{
+  display:none;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 6;
+}
+
+#Next:hover {
+  background-color: #00eeff;
+  transform: scale(1.05);
+}
+
+#Next2:hover {
+  background-color: #00eeff;
+  transform: scale(1.05);
+}
+
+#Prev , #Prev2{
+  display: none;
+  position: absolute;
+  bottom: 20px;
+  left: 20px; /* Positioned near the bottom-left */
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #000000; /* Black background */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  z-index: 6; /* Ensure it's above other elements */
+}
+
+#Prev:hover {
+  background-color: #00eeff; /* Cyan color on hover */
+  transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+#Prev2:hover {
+  background-color: #00eeff; /* Cyan color on hover */
+  transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+/* Modal styling */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Black overlay */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  max-width: 75%;
+  max-height: 75%;
+}
+
+.modal-content img {
+  width: 50%;
+  height: 50%;
+  border-radius: 8px;
+}
+
+.modal-buttons {
+  margin-top: 15px;
+}
+
+.modal-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-button:hover {
+  background-color: #0056b3;
+}
+
+.bins {
+  display:none;
+  width: 300px; /* Reduced width */
+  height: 300px; /* Reduced height */
+  background-size: contain; /* Maintain image proportions */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent repeating the image */
+  position: absolute; /* Position the bins precisely */
+  bottom: 110px; /* Place bins 20px above the bottom */
+  left: 725px;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Smooth hover effect */
+}
+
+/* Hover effect for bins */
+.bins:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+  opacity: 1; /* Slight fade effect */
+}
+
+#rover {
+  display: none;
+  position: absolute;
+  background-size: contain;
+  background-size: center;
+  background-repeat: no-repeat;
+  width: 120px;
+  height: 120px;
+  top: 550px;
+  left: 700px;
+  z-index: 4;
+}
+
+#score {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #007bff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.game-window {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  height: 90%;
+  max-width: 1000px;
+  max-height: 600px;
+  background: rgba(255, 255, 255, 0.1); /* Light translucent background */
+  border: 3px solid rgba(0, 123, 255, 0.3); /* Softer translucent border */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  z-index: 100;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(10px) brightness(1.2); /* Adds a blur and brightens background for mirror effect */
+}
+
+/* Game Title */
+.game-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Trash Items */
+.collected-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.trash-item3 {
+  width: 75px;
+  height: 75px;
+  background-size: contain; /* Resize the image to fit within the container */
+  background-position: center; /* Center the image within the container */
+  background-repeat: no-repeat; /* Prevent tiling of the image */
+  cursor: grab;
+  transition: transform 0.2s;
+}
+
+
+.trash-item3:active {
+  cursor: grabbing;
+  transform: scale(1.1);
+}
+
+/* Bins */
+.bins-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.bin {
+  width: 150px;
+  height: 150px;
+  background-size: contain; /* Resize the image to fit within the bin */
+  background-position: center; /* Center the image within the container */
+  background-repeat: no-repeat; /* Prevent tiling of the image */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+
+.bin:hover {
+  transform: scale(1.05);
+  border-color: #28a745;
+}
+
+/* Close Game Button */
+#closeGame {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+/* Congratulation Message Container */
+.congrats-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600px;
+  padding: 30px;
+  text-align: center;
+  z-index: 1000;
+}
+
+/* Blurred Background */
+.blur-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  z-index: -1; /* Place it behind the content */
+}
+
+/* Congratulations Content */
+.congrats-content {
+  position: relative;
+  color: #ffffff;
+  z-index: 1;
+}
+
+.congrats-content h2 {
+  margin-bottom: 20px;
+}
+
+.congrats-content button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#dialogueBox {
+  display: none; /* Initially hidden */
+  position: absolute; /* Position it relative to the screen */
+  bottom: 20px; /* Positioned 20 pixels from the bottom */
+  left: 50%; /* Centered horizontally */
+  transform: translateX(-50%); /* Center alignment */
+  background: rgba(0, 0, 0, 0.8); /* Dark semi-transparent background */
+  color: white; /* Text color */
+  padding: 15px; /* Padding inside the box */
+  border-radius: 10px; /* Rounded corners */
+  font-family: Arial, sans-serif; /* Font style */
+  font-size: 16px; /* Font size */
+  max-width: 80%; /* Limit the width to 80% of the screen */
+  text-align: center; /* Center the text */
+  z-index: 100; /* Make sure it stays above other elements */
+}
+

@@ -262,7 +262,7 @@ class Planet4Level4 extends Phaser.Scene {
         fontStyle: 'bold'
       }).setOrigin(0.5);
   
-      const restartButton = this.add.text(window.innerWidth / 2 - 100, window.innerHeight / 2 + 100, 'Retake Quiz', {
+      const restartButton = this.add.text(window.innerWidth / 2 - 120, window.innerHeight / 2 + 100, 'Retake Quiz', {
         fontSize: '24px',
         fill: '#fff',
         backgroundColor: '#4CAF50',
@@ -273,7 +273,7 @@ class Planet4Level4 extends Phaser.Scene {
       restartButton.on('pointerout', () => this.hoverOption(restartButton, false));
       restartButton.on('pointerdown', () => this.scene.restart());
   
-      const mainMenuButton = this.add.text(window.innerWidth / 2 + 100, window.innerHeight / 2 + 100, 'Replay level', {
+      const mainMenuButton = this.add.text(window.innerWidth / 2 + 120, window.innerHeight / 2 + 100, 'Return to Menu', {
         fontSize: '24px',
         fill: '#fff',
         backgroundColor: '#2196F3',
@@ -285,7 +285,24 @@ class Planet4Level4 extends Phaser.Scene {
       mainMenuButton.on('pointerdown', () => {
         this.cameras.main.fadeOut(500, 0, 0, 0, (camera, progress) => {
           if (progress === 1) {
-            this.scene.start('TransitionScene', { nextScene: 'MainMenu' });
+            this.scene.start('TransitionScene', { nextScene: 'NameInputScene' });
+          }
+        });
+      });
+
+      const bonusPlanetButton = this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 140, 'Go to Bonus Planet', {
+        fontSize: '24px',
+        fill: '#fff',
+        backgroundColor: '#2196F3',
+        padding: { left: 20, right: 20, top: 10, bottom: 10 }
+      }).setInteractive().setOrigin(0.5);
+  
+      bonusPlanetButton.on('pointerover', () => this.hoverOption(bonusPlanetButton, true));
+      bonusPlanetButton.on('pointerout', () => this.hoverOption(bonusPlanetButton, false));
+      bonusPlanetButton.on('pointerdown', () => {
+        this.cameras.main.fadeOut(500, 0, 0, 0, (camera, progress) => {
+          if (progress === 1) {
+            window.location.href = "../Project/Bonus%20Content/index.html";
           }
         });
       });
