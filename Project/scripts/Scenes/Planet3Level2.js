@@ -27,7 +27,7 @@ class Planet3Level2 extends Phaser.Scene {
         this.load.image('river-background', 'assets/river-background.jpg');
         this.load.image('boat', 'assets/boat.png');
         this.load.image('3bins', 'assets/3bins.png');
-        this.load.audio("lvl2backgroundMusic", "assets/lvl1backgroundMusic.mp3");
+        this.load.audio("lvl2backgroundMusic", "assets/background.mp3");
         this.load.audio("lvl2correctSound", "assets/lvl1correctSound.mp3");
         this.load.audio("lvl2wrongSound", "assets/lvl1wrongSound.mp3");
         this.load.audio("lvl2rewardSound", "assets/lvl1rewardSound.mp3");
@@ -40,6 +40,9 @@ class Planet3Level2 extends Phaser.Scene {
     }
 
     create() {
+        this.backgroundMusic = this.sound.add("lvl2backgroundMusic", { loop: true, volume: 1 });
+        this.backgroundMusic.play();
+
         let bg = this.add.image(this.scale.width / 2, this.scale.height / 2, 'river-background');
         bg.setScale(this.scale.width / bg.width);
         bg.setY(this.scale.height - bg.displayHeight / 2);
@@ -148,6 +151,7 @@ class Planet3Level2 extends Phaser.Scene {
                 backgroundColor: '#333'
             }).setOrigin(0.5).setInteractive();
             menuButton.on('pointerdown', () => {
+                this.backgroundMusic.stop();
                 this.sound.play("clickSound");
                 this.scene.start('MainMenu');
             });
@@ -158,6 +162,7 @@ class Planet3Level2 extends Phaser.Scene {
                 backgroundColor: '#555'
             }).setOrigin(0.5).setInteractive();
             replayButton.on('pointerdown', () => {
+                this.backgroundMusic.stop();
                 this.sound.play("clickSound");
                 this.scene.restart();
             });
@@ -168,6 +173,7 @@ class Planet3Level2 extends Phaser.Scene {
                 backgroundColor: '#ffff00'
             }).setOrigin(0.5).setInteractive();
             nextLevelButton.on('pointerdown', () => {
+                this.backgroundMusic.stop();
                 this.sound.play("clickSound");
                 this.scene.start('Planet3Level3');
             });

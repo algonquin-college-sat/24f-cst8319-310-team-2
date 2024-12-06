@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: url('../public/assets/bg4.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+h1 {
+  font-size: 36px;
+  text-align: center;
+  color: #ff008c;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+
+#quiz-container {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 10px;  
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+#question {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 15px 25px;
+  font-size: 18px;
+  background-color: #28a745;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background-color: #00d9ff;
+}
+
+#next-btn, #try-again-btn {
+  display: none;
+  margin-top: 20px;
+}
+
+#wrong-answer {
+  color: red;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#score {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff008c;
+}
+
+#final-message {
+  font-size: 24px;
+  color: #28a745;
+  margin-top: 30px;
+  font-weight: bold;
+}
+
+#try-again-btn {
+  padding: 15px 25px;
+  font-size: 18px;
+  background-color: #28a745;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+}
+
+#try-again-btn:hover {
+  background-color: #ff9900;
+}
+
+#wrong {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 26, 255, 0.8); 
+  color: white;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: none; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+  animation: pop-up 0.5s ease-in-out forwards;
+}
+
+@keyframes pop-up {
+  0% {
+      transform: translateX(-50%) translateY(20px);
+      opacity: 0;
+  }
+  100% {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+  }
+}
+
+#wrong.fade-out {
+  animation: fade-out 0.2s ease-in forwards;
+}
+
+@keyframes fade-out {
+  0% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
+}

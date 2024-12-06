@@ -58,20 +58,63 @@ class NameInputScene extends Phaser.Scene {
           this.scene.start(savedProgress.currentScene, savedProgress); // Resume game with saved progress
         });
 
-        // Demo to a Scene Button 
-        this.add
-        .text(this.scale.width / 2, 400, "Demo: Planet 3", {
-          fontSize: "24px",
-          color: "#0f0",
-          backgroundColor: "#000",
-          padding: { x: 10, y: 5 },
-        })
-        .setOrigin(0.5)
-        .setInteractive()
-        .on("pointerdown", () => {
-          this.sound.play("clickSound"); // Play click sound
-          this.scene.start("Planet3Level1");
-        });
+        // UNCOMMENT THE BELOW LINES TO SHOW BUTTONS TO GO TO DIFFERENT SCENES IF YOU NEED TO DEBUG OR DEMO THEM
+
+        // // Jump to a Scene Button (Planet 3; For Demo Purposes)
+        // this.add.text(this.scale.width / 2, 400, "Jump to Planet 3", {
+        //   fontSize: "24px",
+        //   color: "#0f0",
+        //   backgroundColor: "#000",
+        //   padding: { x: 10, y: 5 },
+        // })
+        // .setOrigin(0.5)
+        // .setInteractive()
+        // .on("pointerdown", () => {
+        //   this.sound.play("clickSound"); // Play click sound
+        //   this.scene.start("Planet3Level1");
+        // });
+
+        // // Jump to a Scene Button (Planet 4; For Demo Purposes)
+        // this.add.text(this.scale.width / 2, 450, "Jump to Planet 4", {
+        //   fontSize: "24px",
+        //   color: "#0f0",
+        //   backgroundColor: "#000",
+        //   padding: { x: 10, y: 5 },
+        // })
+        // .setOrigin(0.5)
+        // .setInteractive()
+        // .on("pointerdown", () => {
+        //   this.sound.play("clickSound"); // Play click sound
+        //   this.scene.start("Planet4IntroScene");
+        // });
+
+        // // Jump to a Scene Button (Planet 4 Level 3; For Demo Purposes)
+        // this.add.text(this.scale.width / 2 + 350, 450, "Jump to Planet 4 Level 3", {
+        //   fontSize: "24px",
+        //   color: "#0f0",
+        //   backgroundColor: "#000",
+        //   padding: { x: 10, y: 5 },
+        // })
+        // .setOrigin(0.5)
+        // .setInteractive()
+        // .on("pointerdown", () => {
+        //   this.sound.play("clickSound"); // Play click sound
+        //   this.scene.start("Planet4Level3");
+        // });
+
+        // // Jump to a Scene Button (Planet 4 Level 4; For Demo Purposes)
+        // this.add.text(this.scale.width / 2 + 650, 450, "Jump to Planet 4 Level 4", {
+        //   fontSize: "24px",
+        //   color: "#0f0",
+        //   backgroundColor: "#000",
+        //   padding: { x: 10, y: 5 },
+        // })
+        // .setOrigin(0.5)
+        // .setInteractive()
+        // .on("pointerdown", () => {
+        //   this.sound.play("clickSound"); // Play click sound
+        //   this.scene.start("Planet4Level4");
+        // });
 
       // Start Fresh Button
       this.add

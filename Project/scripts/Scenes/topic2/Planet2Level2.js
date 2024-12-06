@@ -190,6 +190,7 @@ class Planet2Level2 extends Phaser.Scene {
                 duration: 3000, // 3 seconds fade-out
                 onComplete: () => {
                     level3Text.destroy(); // Remove "Level 3" text after fade-out
+                    this.backgroundMusic.stop();
                     this.scene.start("Planet2Level3"); // Replace with the next scene name
                 },
             });

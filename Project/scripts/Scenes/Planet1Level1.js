@@ -177,7 +177,6 @@ class Planet1Level1 extends Phaser.Scene {
   updateScore() {
     this.scoreText.setText(`Score: ${this.score}/5`);
     if (this.score === 5) {
-      // this.backgroundMusic.stop();
       this.endLevel();
     } else {
       this.saveProgress();
@@ -214,10 +213,11 @@ class Planet1Level1 extends Phaser.Scene {
       .setOrigin(0.5);
 
        // Play the reward sound
-       this.sound.play("lvl1rewardSound");
+      this.sound.play("lvl1rewardSound");
 
     localStorage.removeItem("level1Progress"); // Clear saved progress
     this.time.delayedCall(3000, () => {
+      this.backgroundMusic.stop();
       this.scene.start("Planet1Level2"); // Transition to Level 2
     });
   }

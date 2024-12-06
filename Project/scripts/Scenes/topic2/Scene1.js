@@ -176,6 +176,7 @@ class Scene1 extends Phaser.Scene {
             }
       
             // Transition to the next scene
+            this.backgroundMusic.stop();
             this.scene.start("Planet2Level1");
           },
         });
