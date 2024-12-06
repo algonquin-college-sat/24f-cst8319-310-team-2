@@ -5,33 +5,6 @@
 
 Eco-Adventures is a browser-based educational game built with Phaser.js. Designed to run in Visual Studio, the game engages children in learning about sustainability through interactive gameplay. Players progress through levels that cover topics such as renewable energy, waste management, air pollution, and environmental protection.
 
----
-
-## Installation Guide
-
-### Prerequisites
-
-- **Visual Studio**: Ensure Visual Studio is installed.
-- **Phaser.js**: The game is built with Phaser.js, and all required libraries are included in the project files.
-
-### Steps to Run the Game
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/nav3112/SoftwareProject/edit/main
-   cd main
-   ```
-
-2. **Open in Visual Studio**:
-   - Launch Visual Studio.
-   - Open the project folder.
-
-3. **Run the Game**:
-   - Select the `index.html` file in the project directory.
-   - Click the "Run" or "Debug" option in Visual Studio to start the game in your default browser.
-
----
-
 ## Gameplay Overview
 
 ### Topics and Levels
@@ -41,12 +14,12 @@ Eco-Adventures is a browser-based educational game built with Phaser.js. Designe
 - **Level 2**: Use a bin to catch falling waste and sort it correctly.
 - **Quiz**: Test your knowledge about waste sorting.
 
-#### Topic 2: Renewable Energy (by Nour)
+#### Topic 2: Renewable Energy (by Nouraldin)
 - **Level 1**: Generate energy by placing solar panels on buildings.
 - **Level 2**: Collect and dispose of waste floating in a river using a boat.
 - **Quiz**: Test your knowledge about energy and waste management.
 
-#### Topic 3: Waste Management (by Kushi)
+#### Topic 3: Waste Management (by Khushpreet)
 - **Level 1**: Sort waste into appropriate categories and unlock rewards.
 - **Level 2**: Plant seeds and grow plants to learn about composting and greenery.
 - **Level 3**: Quiz on waste management and planting.
